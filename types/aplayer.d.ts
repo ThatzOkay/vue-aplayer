@@ -23,7 +23,7 @@ declare global {
       [index: number]: this;
 
       id?: number;
-      name: string | VNode; // eslint-disable-line no-restricted-globals
+      name: string | VNode; 
       artist: string | VNode;
       url: string;
       cover?: string;
@@ -31,24 +31,6 @@ declare global {
       theme?: string;
       type?: AudioType;
       speed?: number;
-    }
-
-    export interface Options {
-      fixed?: boolean;
-      mini?: boolean;
-      autoplay?: boolean;
-      theme?: string;
-      loop?: LoopMode;
-      order?: OrderMode;
-      preload?: Preload;
-      volume?: number;
-      audio: Audio | Audio[];
-      customAudioType?: any;
-      mutex?: boolean;
-      lrcType?: LrcType;
-      listFolded?: boolean;
-      listMaxHeight?: number;
-      storageName?: string;
     }
 
     export interface Events {
@@ -105,57 +87,55 @@ declare global {
     }
 
     export interface Media {
-      /** 返回表示可用音频轨道的 AudioTrackList 对象。 */
-      readonly audioTracks: AudioTrackList;
-      /** 设置或返回是否在就绪（加载完成）后随即播放音频。 */
+      /** Sets or returns whether the audio should start playing as soon as it is ready. */
       readonly autoplay: boolean;
-      /** 返回表示音频已缓冲部分的 TimeRanges 对象。 */
+      /** Returns the TimeRanges object representing the buffered parts of the audio. */
       readonly buffered: TimeRanges;
-      /** 设置或返回音频是否应该显示控件（比如播放/暂停等）。 */
+      /** Sets or returns whether the audio should display controls (like play/pause etc.). */
       readonly controls: boolean;
-      /** 设置或返回音频的 CORS 设置。 */
+      /** Sets or returns the CORS setting for the audio. */
       readonly crossOrigin: string | null;
-      /** 返回当前音频的 URL。 */
+      /** Returns the current URL of the audio. */
       readonly currentSrc: string;
-      /** 设置或返回音频中的当前播放位置（以秒计）。 */
+      /** Sets or returns the current playback position in the audio (in seconds). */
       readonly currentTime: number;
-      /** 设置或返回音频默认是否静音。 */
+      /** Sets or returns whether the audio is muted by default. */
       readonly defaultMuted: boolean;
-      /** 设置或返回音频的默认播放速度。 */
+      /** Sets or returns the default playback speed of the audio. */
       readonly defaultPlaybackRate: number;
-      /** 返回音频的长度（以秒计）。 */
+      /** Returns the length of the audio (in seconds). */
       readonly duration: number;
-      /** 返回音频的播放是否已结束。 */
+      /** Returns whether the playback of the audio has ended. */
       readonly ended: boolean;
-      /** 返回表示音频错误状态的 MediaError 对象。 */
+      /** Returns the MediaError object representing the error state of the audio. */
       readonly error: MediaError | null;
-      /** 设置或返回音频是否应在结束时再次播放。 */
+      /** Sets or returns whether the audio should loop when it ends. */
       readonly loop: boolean;
-      /** 设置或返回音频所属媒介组合的名称。 */
+      /** Sets or returns the name of the media key system for the audio. */
       readonly mediaKeys: MediaKeys | null;
-      /** 设置或返回是否关闭声音。 */
+      /** Sets or returns whether the audio is muted. */
       readonly muted: boolean;
-      /** 返回音频的当前网络状态。 */
+      /** Returns the current network state of the audio. */
       readonly networkState: number;
-      /** 设置或返回音频是否暂停。 */
+      /** Sets or returns whether the audio is paused. */
       readonly paused: boolean;
-      /** 设置或返回音频播放的速度。 */
+      /** Sets or returns the playback speed of the audio. */
       readonly playbackRate: number;
-      /** 返回表示音频已播放部分的 TimeRanges 对象。 */
+      /** Returns the TimeRanges object representing the played parts of the audio. */
       readonly played: TimeRanges;
-      /** 设置或返回音频的 preload 属性的值。 */
+      /** Sets or returns the value of the preload attribute of the audio. */
       readonly preload: string;
-      /** 返回音频当前的就绪状态。 */
+      /** Returns the current ready state of the audio. */
       readonly readyState: number;
-      /** 返回表示音频可寻址部分的 TimeRanges 对象。 */
+      /** Returns the TimeRanges object representing the seekable parts of the audio. */
       readonly seekable: TimeRanges;
-      /** 返回用户当前是否正在音频中进行查找。 */
+      /** Returns whether the user is currently seeking in the audio. */
       readonly seeking: boolean;
-      /** 设置或返回音频的 src 属性的值。 */
+      /** Sets or returns the value of the src attribute of the audio. */
       readonly src: string;
-      /** 返回表示可用文本轨道的 TextTrackList 对象。 */
+      /** Returns the TextTrackList object representing available text tracks. */
       readonly textTracks: TextTrackList;
-      /** 设置或返回音频的音量。 */
+      /** Sets or returns the volume of the audio. */
       readonly volume: number;
     }
   }

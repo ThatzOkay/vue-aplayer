@@ -1,0 +1,33 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "types": [ "hls.js" , "node" ],
+    "baseUrl": ".",
+    "paths": {
+      "utils/*": ["utils/*"],
+      "@moefe/vue-audio": ["packages/@moefe/vue-audio/index.ts"],
+      "@moefe/vue-store": ["packages/@moefe/vue-store/index.ts"],
+      "@moefe/vue-touch": ["packages/@moefe/vue-touch/index.tsx"],
+      "@moefe/vue-aplayer": ["packages/@moefe/vue-aplayer/index.ts"]
+    }
+  },
+  "include": ["types/**/*.ts", 
+              "types/**/*.d.ts",
+              "example/**/*.ts", 
+              "example/**/*.tsx", 
+              "example/**/*.vue",
+              "packages/**/*.ts",
+              "packages/**/*.tsx",
+              "packages/**/*.vue",
+              "utils/**/*.ts"]
+}

@@ -50,8 +50,3 @@ export class APlayer extends Vue.Component<_APlayer.Options, _APlayer.Events> {
 
   showNotice(text: string, time?: number, opacity?: number): void;
 }
-
-export default function install(
-  Vue: typeof _Vue,
-  options?: _APlayer.InstallOptions
-): void;

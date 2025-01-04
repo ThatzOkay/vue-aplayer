@@ -1,23 +1,21 @@
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import { ref, watch } from 'vue';
 
-@Component
-export default class VueStore extends Vue {
-  public key: string = 'aplayer-setting';
+const key = 'aplayer-setting';
 
-  public store: any[] = this.get(this.key);
+// Reactive store for shared data
+const store = ref<any[]>(JSON.parse(localStorage.getItem(key) || '[]'));
 
-  // eslint-disable-next-line class-methods-use-this
-  public get(key: string): any[] {
-    return JSON.parse(localStorage.getItem(key) || '[]');
-  }
+// Watch for changes to sync with localStorage
+watch(store, (newVal) => {
+  localStorage.setItem(key, JSON.stringify(newVal));
+});
 
-  public set(val: any[]) {
-    this.store = val;
-    localStorage.setItem(this.key, JSON.stringify(val));
-  }
+// Methods to interact with the store
+const set = (val: any[]) => {
+  store.value = val;
+};
 
-  render() {
-    return null;
-  }
-}
+export const usePlayerStore = () => ({
+  store,
+  set,
+});
