@@ -1,16 +1,16 @@
-<template>
-    <img :src="icon" />   
+  <template>
+  <img :src="icon" :alt="`${type} icon`" />
 </template>
 
 <script setup lang="ts">
-import play from '../assets/svg/play.svg';
-import pause from '../assets/svg/pause.svg';
-import { ref } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
   type: String,
 });
 
-const icon = ref(props.type === 'play' ? play : pause);
-
+// Dynamically construct the path to the SVG based on the `type` prop
+const icon = computed(() => {
+  return new URL(`../assets/svg/${props.type}.svg`, import.meta.url).href;
+});
 </script>

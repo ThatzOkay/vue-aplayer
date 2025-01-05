@@ -3,7 +3,7 @@ export function sleep(delay: number = 0): Promise<void> {
 }
 
 export function eventLoop(
-  target: () => any,
+  target: () => boolean,
   timeout: number = 3000,
 ): Promise<void> {
   return new Promise((resolve, reject) => {

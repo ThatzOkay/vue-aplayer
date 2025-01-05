@@ -4,7 +4,7 @@
         'aplayer-lrc-hide': !visible,
     })">
         <div class="aplayer-lrc-contents" :style="style">
-            <p v-if="parsed().length > 0" v-for="(item) in parsed()" 
+            <p v-if="parsed().length > 0" v-for="(item) in parsed()"
                 v-bind:key="item.time" :class="classNames({
                     'aplayer-lrc-current': item.time === current.time,
                 })">
@@ -96,6 +96,10 @@ const parseLRC = (lrc: string): Array<LRC> => {
 const getLyricFromCurrentMusic = (): Promise<string> => {
     return new Promise<string>((resolve: (value: string | PromiseLike<string>) => void, reject: (reason?: any) => void) => {
         const { lrcType, currentMusic } = aplayer;
+        if(aplayer.lrcType === undefined) {
+            resolve('');
+            return;
+        }
         switch (aplayer.lrcType) {
             case 0:
                 resolve('');

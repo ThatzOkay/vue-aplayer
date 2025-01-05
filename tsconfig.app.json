@@ -17,14 +17,14 @@
       "utils/*": ["utils/*"],
       "@moefe/vue-audio": ["packages/@moefe/vue-audio/index.ts"],
       "@moefe/vue-store": ["packages/@moefe/vue-store/index.ts"],
-      "@moefe/vue-touch": ["packages/@moefe/vue-touch/index.tsx"],
+      "@moefe/vue-touch/*": ["packages/@moefe/vue-touch/*"],
       "@moefe/vue-aplayer": ["packages/@moefe/vue-aplayer/index.ts"]
     }
   },
-  "include": ["types/**/*.ts", 
+  "include": ["types/**/*.ts",
               "types/**/*.d.ts",
-              "example/**/*.ts", 
-              "example/**/*.tsx", 
+              "example/**/*.ts",
+              "example/**/*.tsx",
               "example/**/*.vue",
               "packages/**/*.ts",
               "packages/**/*.tsx",

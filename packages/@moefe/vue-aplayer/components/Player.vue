@@ -6,7 +6,16 @@
             </div>
         </Cover>
         <Main>
-            <Controller />
+            <Controller @skipBack="handleSkipBackward"
+            @skipForward="handleSkipForward"
+            @togglePlay="handleTogglePlay"
+            @toggleOrderMode="handleToggleOrderMode"
+            @toggleLoopMode="handleToggleLoopMode"
+            @togglePlaylist="handleTogglePlaylist"
+            @toggleLyric="handleToggleLyric"
+            @changeVolume="handleChangeVolume"
+            @changeProgress="handleChangeProgress"
+             />
         </Main>
         <div class="aplayer-notice" :style="{opacity: notice?.opacity}">
             {{ notice?.text }}
@@ -22,6 +31,8 @@ import { inject, provide, ref } from 'vue';
 import Cover from './Cover.vue';
 import Button from './Button.vue';
 import Icon from './Icon.vue';
+import Main from './Main.vue';
+import Controller from './Controller.vue';
 import type { Options } from 'types/options';
 
 interface Notice {
@@ -48,14 +59,14 @@ const playIcon = ref(aplayer?.media?.paused ? 'play' : 'pause')
 
 const emit = defineEmits([
     'togglePlay',
-    'skipBackward', 
-    'skipForward', 
-    'toggleOrderMode', 
-    'toggleLoopMode', 
-    'togglePlaylist', 
-    'toggleLyric', 
-    'changeVolume', 
-    'changeProgress', 
+    'skipBackward',
+    'skipForward',
+    'toggleOrderMode',
+    'toggleLoopMode',
+    'togglePlaylist',
+    'toggleLyric',
+    'changeVolume',
+    'changeProgress',
     'miniSwitcher']);
 
 const handleTogglePlay = () => {
@@ -90,8 +101,8 @@ const handleChangeVolume = (volume: number) => {
     emit('changeVolume', volume);
 };
 
-const handleChangeProgress = (progress: number) => {
-    emit('changeProgress', progress);
+const handleChangeProgress = (e: MouseEvent | TouchEvent, percent: number) => {
+    emit('changeProgress',  e, percent);
 };
 
 const handleMiniSwitcher = () => {

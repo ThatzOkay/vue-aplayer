@@ -1,12 +1,31 @@
 {
-  "name": "vue3-aplayer",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@moefe/vue-aplayer",
+  "description": "A beautiful HTML5 music player for Vue.js",
+  "version": "2.0.0-beta.5",
+  "author": "u3u <qwq@qwq.cat>",
+  "license": "MIT",
+  "homepage": "https://github.com/ThatzOkay/vue-aplayer#readme",
   "type": "module",
   "types": "types/index.d.ts",
   "files": [
     "dist",
     "types"
+  ],
+  "repository": {
+    "url": "git+https://github.com/ThatzOkay/vue-aplayer.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThatzOkay/vue-aplayer/issues"
+  },
+  "keywords": [
+    "player",
+    "aplayer",
+    "vue-aplayer",
+    "music",
+    "html5",
+    "audio",
+    "media"
   ],
   "scripts": {
     "dev": "vite",
@@ -21,14 +40,24 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@types/hls.js": "^1.0.0",
     "@types/node": "^22.10.2",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "@vuepress/plugin-pwa": "^1.9.10",
     "axios": "^1.7.9",
+    "eslint": "^9.17.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "globals": "^15.14.0",
+    "lint-staged": "^15.3.0",
+    "postcss": "^8.4.49",
+    "prettier": "^3.4.2",
+    "prettier-eslint-check": "^1.0.3",
+    "prettier-eslint-cli": "^8.0.1",
     "sass-embedded": "^1.83.0",
     "typescript": "~5.6.2",
+    "typescript-eslint": "^8.19.0",
     "vite": "^6.0.5",
     "vue-tsc": "^2.2.0",
     "vuepress": "^1.9.10"
