@@ -1,5 +1,5 @@
 <template>
-    <div :class="classNames"
+    <div ref="touchElement" :class="classNames"
         style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
         <slot></slot>
     </div>
@@ -19,9 +19,11 @@ interface TouchEvents {
     (evt: 'onPanEnd', e: MouseEvent | TouchEvent): void;
 }
 
+const touchElement = ref<HTMLElement | null>(null);
+
 defineProps<TouchProps>();
 
-const emit = defineEmits<TouchEvents>();
+const emit = defineEmits(['onPanStart', 'onPanMove', 'onPanEnd']);
 
 const panMoveClass = ref<string | undefined>();
 const onMobile = ref(isMobile());
@@ -56,7 +58,6 @@ onMounted(() => {
   };
 
   // Attach the event listener to the root element
-  const el = document.querySelector('.touch-element') as HTMLElement;
-  el?.addEventListener(dragStart.value, handleDragStart);
+  touchElement.value?.addEventListener(dragStart.value, handleDragStart);
 });
 </script>

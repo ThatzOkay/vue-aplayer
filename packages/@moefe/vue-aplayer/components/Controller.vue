@@ -84,6 +84,7 @@ const handleToggleVolume = () => {
 }
 
 const handlePanMove = (e: MouseEvent | TouchEvent) => {
+  console.log('handlePanMove volume bar');
   if (volumeBar.value) {
     const volumeBarRect = volumeBar.value.getBoundingClientRect();
     const clientY = !e.type.startsWith('touch')

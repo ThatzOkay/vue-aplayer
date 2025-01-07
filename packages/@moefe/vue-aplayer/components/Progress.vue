@@ -1,5 +1,5 @@
 <template>
-  <VueTouch class="aplayer-bar-wrap" @onPanMove="handleChange" @onPanEnd="handleChange">
+  <VueTouch class="aplayer-bar-wrap" @on-pan-move="handleChange" @on-pan-end="handleChange">
     <div ref="progressBar" class="aplayer-bar">
       <div class="aplayer-loaded" :style="loadedStyle">
       </div>
