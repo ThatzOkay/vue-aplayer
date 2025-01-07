@@ -20,8 +20,8 @@
         <VueTouch class="aplayer-volume-bar-wrap" @on-pan-move="handlePanMove">
           <div ref="volumeBar" class="aplayer-volume-bar" @click="handleClickVolumeBar">
             <div class="aplayer-volume" :style="{
-                    height: `${aplayer.currentVolume.value * 100}%`,
-                    backgroundColor: aplayer.currentTheme.value,
+              height: `${aplayer.currentVolume.value * 100}%`,
+              backgroundColor: aplayer.currentTheme.value,
             }"></div>
           </div>
         </VueTouch>
@@ -45,13 +45,14 @@ import type { Options } from 'types/options';
 const volumeBar = ref<HTMLElement | null>(null);
 
 const aplayer = inject<Options & {
-    media: ComputedRef<APlayer.Media>;
-    currentTheme:  Ref<string>;
-    currentVolume:  Ref<number>;
-    currentPlayed: Ref<number>;
-    currentLoop:  Ref<APlayer.LoopMode>;
-    currentOrder: Ref<APlayer.OrderMode>;
-    currentProps: Options; }>('aplayer')!;
+  media: ComputedRef<APlayer.Media>;
+  currentTheme: Ref<string>;
+  currentVolume: Ref<number>;
+  currentPlayed: Ref<number>;
+  currentLoop: Ref<APlayer.LoopMode>;
+  currentOrder: Ref<APlayer.OrderMode>;
+  currentProps: Options;
+}>('aplayer')!;
 
 const handleSkipBackward = inject('handleSkipBackward') as () => void;
 const handleSkipForward = inject('handleSkipForward') as () => void;
@@ -66,13 +67,17 @@ const playIcon = computed(() => (aplayer.media.value.paused ? 'play' : 'pause'))
 const volumeIcon = ref(aplayer.currentVolume.value <= 0 ? 'off' : aplayer.currentVolume.value >= 0.95 ? 'up' : 'down');
 
 const timeSecondsFormat = (time: number = 0): string => {
-    const minutes = Math.floor(time / 60) || 0;
-    const seconds = Math.floor(time % 60) || 0;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`; // prettier-ignore
-  }
+  const minutes = Math.floor(time / 60) || 0;
+  const seconds = Math.floor(time % 60) || 0;
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`; // prettier-ignore
+}
 
-const ptime = ref(timeSecondsFormat(aplayer.media.value.currentTime * aplayer.media.value.duration));
-const dtime = ref(timeSecondsFormat(aplayer.media.value.duration));
+const ptime = computed(() => {
+  const currentTime = aplayer.media.value.currentTime || 0;
+  return timeSecondsFormat(currentTime);
+});
+
+const dtime = computed(() => timeSecondsFormat(aplayer.media.value.duration));
 
 const handleToggleVolume = () => {
   handleChangeVolume(aplayer.currentVolume.value > 0 ? 0 : aplayer.currentProps.volume ?? 0.7);

@@ -1,12 +1,10 @@
 <template>
-  <VueTouch class="aplayer-bar-wrap" @on-pan-move="handleChange" @on-pan-end="handleChange">
+  <VueTouch class="aplayer-bar-wrap" @onPanMove="handleChange" @onPanEnd="handleChange">
     <div ref="progressBar" class="aplayer-bar">
       <div class="aplayer-loaded" :style="loadedStyle">
       </div>
       <div class="aplayer-played" :style="playedStyle">
-        <span class="aplayer-thumb" :style="{
-          backgroundColor: aplayer.currentTheme.value,
-        }">
+        <span class="aplayer-thumb" :style="style">
           <span class="aplayer-loading-icon">
             <Icon type="loading" />
           </span>
@@ -20,7 +18,7 @@
 import VueTouch from '@moefe/vue-touch/VueTouch.vue';
 import Icon from './Icon.vue';
 import type { Options } from 'types/options';
-import { inject, ref, type Ref } from 'vue';
+import { inject, ref, computed, type Ref } from 'vue';
 
 const progressBar = ref<HTMLElement | null>(null);
 
@@ -30,18 +28,23 @@ const aplayer = inject<Options & {
   currentLoaded: Ref<number>;
 }>('aplayer')!;
 
-const loadedStyle = ref({
-  width: `${aplayer.currentLoaded.value * 100}%`,
-});
-
-const playedStyle = ref({
-  width : `${aplayer.currentPlayed.value * 100}%`,
+const style = computed(() => ({
   backgroundColor: aplayer.currentTheme.value,
-});
+}));
+
+const loadedStyle = computed(() => ({
+  width: `${aplayer.currentLoaded.value * 100}%`,
+}));
+
+const playedStyle = computed(() => ({
+  width: `${aplayer.currentPlayed.value * 100}%`,
+  backgroundColor: aplayer.currentTheme.value,
+}));
 
 const handleChangeProgress = inject('handleChangeProgress') as (e: MouseEvent | TouchEvent, percent: number) => void;
 
 const handleChange = (e: MouseEvent | TouchEvent) => {
+  console.log('handleChange progress bar');
   if (!progressBar.value) {
     return;
   }
