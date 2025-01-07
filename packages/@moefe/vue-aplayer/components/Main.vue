@@ -12,17 +12,19 @@
 <script setup lang="ts">
 import Lyric from './Lyric.vue';
 import type { Options } from 'types/options';
-import { inject, ref } from 'vue';
+import { inject, computed, type Ref } from 'vue';
 
 const aplayer = inject<Options & {
     options: APlayer.InstallOptions;
-    currentTheme: string;
-    currentMusic: APlayer.Audio;
-    media: APlayer.Media;
+    currentTheme: Ref<string>;
+    currentMusic: Ref<APlayer.Audio>;
+    media: Ref<APlayer.Media>;
 }>('aplayer')!;
 
-const music = ref({
-    name: aplayer.currentMusic.name,
-    artist: aplayer.currentMusic.artist,
+const music = computed(() => {
+    return {
+        name: aplayer.currentMusic.value.name,
+        artist: aplayer.currentMusic.value.artist
+    }
 })
 </script>

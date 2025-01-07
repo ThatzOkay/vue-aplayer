@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import type { Options } from 'types/options';
-import { inject, ref, type Ref } from 'vue';
+import { inject, computed, type Ref } from 'vue';
 
 
 const aplayer = inject<Options & {
@@ -15,11 +15,13 @@ const aplayer = inject<Options & {
     currentMusic: Ref<APlayer.Audio>;
   }>('aplayer')!;
 
-const cover = ref<string | undefined>(aplayer?.currentMusic?.value.cover || aplayer?.options?.defaultCover);
-const style = ref<{ [key: string]: string }>({
+const cover = computed(() => {
+  return aplayer.currentMusic && aplayer.currentMusic.value.cover || aplayer.options.defaultCover;
+});
+const style = computed(() => ({
   backgroundImage: `url(${cover.value})`,
   backgroundColor: aplayer?.currentTheme,
-});
+}));
 
 const emit = defineEmits(['click']);
 

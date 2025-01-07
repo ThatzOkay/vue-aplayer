@@ -1,5 +1,5 @@
 <template>
-  <a-player :fixed="aplayer0.fixed" :lrcType="aplayer0.lrcType" :listMaxHeight="aplayer0.listMaxHeight" :preload="aplayer0.preload" :audio="aplayer0.audio" />
+  <!-- <a-player :fixed="aplayer0.fixed" :lrcType="aplayer0.lrcType" :listMaxHeight="aplayer0.listMaxHeight" :preload="aplayer0.preload" :audio="aplayer0.audio" /> -->
   <div class="landing">
     <h1>Vue-Aplayer</h1>
     <h3>🍰 A beautiful HTML5 music player for Vue.js.</h3>
@@ -58,10 +58,13 @@ onMounted(async () => {
     }
   }
   await sleep(1500);
-  aplayer1.value.audio = data.splice(0, 4);
-  await sleep(1500);
   console.log("data aplayer0", data);
   aplayer0.value.audio = data;
+
+  await sleep(1500);
+  const aplayer1Data = data.splice(0, 4);
+  console.log("data aplayer1", aplayer1Data);
+  aplayer1.value.audio = aplayer1Data;
 })
 
 </script>

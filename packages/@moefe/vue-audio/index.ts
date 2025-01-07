@@ -17,6 +17,7 @@ export default defineComponent({
   setup() {
     const audio = new Audio();
 
+    audio.volume = 0;
     // Define the type of the state
     const state = reactive({
       autoplay: audio.autoplay,
@@ -82,7 +83,7 @@ export default defineComponent({
     };
   },
   render() {
-    // This component doesn't render anything visually
-    return null;
+    // Render the default slot
+    return this.$slots.default ? this.$slots.default() : null;
   },
 });

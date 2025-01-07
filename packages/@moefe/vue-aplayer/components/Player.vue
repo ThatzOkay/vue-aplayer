@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, provide, ref } from 'vue';
+import { inject, provide, computed, type Ref, type ComputedRef} from 'vue';
 import Cover from './Cover.vue';
 import Button from './Button.vue';
 import Icon from './Icon.vue';
@@ -35,7 +35,7 @@ import Main from './Main.vue';
 import Controller from './Controller.vue';
 import type { Options } from 'types/options';
 
-interface Notice {
+export interface Notice {
   text: string;
   time: number;
   opacity: number;
@@ -50,12 +50,12 @@ defineProps<PlayerProps>();
 
 const aplayer = inject<Options & {
     options: APlayer.InstallOptions;
-    currentTheme: string;
-    currentMusic: APlayer.Audio;
-    media: APlayer.Media;
+    currentTheme: Ref<string>;
+    currentMusic: Ref<APlayer.Audio>;
+    media: ComputedRef<APlayer.Media>;
 }>('aplayer')!;
 
-const playIcon = ref(aplayer?.media?.paused ? 'play' : 'pause')
+const playIcon = computed(() => aplayer?.media.value.paused ? 'play' : 'pause');
 
 const emit = defineEmits([
     'togglePlay',

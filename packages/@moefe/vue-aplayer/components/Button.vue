@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue';
 import Icon from './Icon.vue';
 
 interface ButtonProps {
@@ -22,5 +23,9 @@ const handleClick = () => {
     emit('click');
 };
 
-defineProps<ButtonProps>();
+const props = defineProps<ButtonProps>();
+
+watch(() => props.type, () => {
+    console.log(props.type);
+});
 </script>

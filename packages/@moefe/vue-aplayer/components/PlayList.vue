@@ -1,7 +1,7 @@
 <template>
-    <ol ref="list" class="aplayer-list" :style="{ height: listHeight + 'px' }">
+    <ol ref="list" class="aplayer-list" :style="style">
         <li v-for="(item, index) in dataSource" :key="item.id" :class="classNames({
-            'aplayer-list-light': item.id === currentMusic.id,
+            'aplayer-list-light': item.id === currentMusic?.id,
         })" @click="handleClick(item)">
             <span class="aplayer-list-cur" :style="{ backgroundColor: aplayer?.currentTheme}" />
             <span class="aplayer-list-index">{{index + 1}}</span>
@@ -14,11 +14,11 @@
 <script setup lang="ts">
 import classNames from 'classnames';
 import type { Options } from 'types/options';
-import { computed, inject, nextTick, ref, watch } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 
 interface PlayListProps {
     visible?: boolean;
-    currentMusic: APlayer.Audio;
+    currentMusic?: APlayer.Audio;
     dataSource: APlayer.Audio[];
     scrollTop: number;
 }
@@ -41,17 +41,24 @@ const listHeight = computed(() => {
         : 0;
 })
 
+const style = computed(() => {
+    return {
+        height: listHeight.value + 'px',
+    }
+})
+
 const handleChangeScrollTop = async () => {
-    await nextTick();
     if (props.visible) {
-        list.value!.scrollTop = props.scrollTop;
+        if (!list.value) {
+          return;
+        }
+        list.value.scrollTop = props.scrollTop;
     }
 }
 
 watch(() => props.scrollTop, () => handleChangeScrollTop(), { immediate: true });
 watch(() => props.dataSource, () => handleChangeScrollTop(), { immediate: true });
 watch(() => props.visible, () => handleChangeScrollTop());
-
 
 const handleClick = (item: APlayer.Audio) => {
     emit('change', item);
