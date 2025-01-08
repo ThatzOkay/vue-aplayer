@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import classNames from 'classnames';
-import { computed, watch } from 'vue';
+import { computed, watch, type Ref } from 'vue';
 import type { Options } from 'types/options';
 import { inject, ref } from 'vue';
 
@@ -34,10 +34,11 @@ defineProps<LyricProps>();
 
 const aplayer = inject<Options & {
     options: APlayer.InstallOptions;
-    currentTheme: string;
-    currentPlayed: number;
-    currentMusic: APlayer.Audio;
-    media: APlayer.Media;
+    currentTheme: Ref<string>;
+    currentPlayed: Ref<number>;
+    currentMusic: Ref<APlayer.Audio>;
+    media: Ref<APlayer.Media>;
+    lrcType: Ref<number>;
 }>('aplayer')!;
 
 const lrc = ref<string>('');
@@ -46,7 +47,7 @@ const xhr = ref(new XMLHttpRequest());
 const isLoading = ref(false);
 
 const noLyrics = () => {
-    return !aplayer.currentMusic.id ?
+    return !aplayer.currentMusic.value.id ?
         '(ಥ﹏ಥ) No audio loaded' : isLoading.value ?
             '(☆ω☆) Loading...' : lrc.value ?
                 '(・∀・*) Sorry, this lyric format is not supported' :
@@ -90,7 +91,7 @@ const parseLRC = (lrc: string): Array<LRC> => {
         parsed.sort((a, b) => a.time - b.time);
     }
 
-    return parsed;
+    return parsed.length > 0 ? parsed : [{ time: 0, text: lrc !== '' ? lrc : noLyrics() }];
 }
 
 const getLyricFromCurrentMusic = (): Promise<string> => {
@@ -100,16 +101,17 @@ const getLyricFromCurrentMusic = (): Promise<string> => {
             resolve('');
             return;
         }
+
         switch (aplayer.lrcType) {
             case 0:
                 resolve('');
                 break;
             case 1:
-                resolve(aplayer.currentMusic?.lrc ?? '');
+                resolve(aplayer.currentMusic.value.lrc ?? '');
                 break;
             case 3:
-                if (currentMusic.lrc) {
-                    xhr.value.open('GET', currentMusic.lrc, true);
+                if (currentMusic.value.lrc) {
+                    xhr.value.open('GET', currentMusic.value.lrc, true);
                     xhr.value.onreadystatechange = () => {
                         if (xhr.value.readyState === 4 && xhr.value.status === 200) {
                             resolve(xhr.value.responseText);
@@ -134,8 +136,9 @@ const parsed = () => {
 }
 
 const current = computed(() => {
+    console.log("parsed: ", parsed())
     const match = parsed().filter(
-        x => x.time < aplayer.currentPlayed * aplayer.media.duration * 1000,)
+        x => x.time < aplayer.currentPlayed.value * aplayer.media.value.duration * 1000,)
     if (match && match.length > 0) return match[match.length - 1];
     return parsed()[0];
 })
@@ -164,5 +167,5 @@ const handleChange = async () => {
 }
 
 watch(() => aplayer.lrcType, handleChange, { immediate: true });
-watch(() => aplayer.currentMusic.lrc, handleChange, { immediate: true });
+watch(() => aplayer.currentMusic.value.lrc, handleChange, { immediate: true });
 </script>

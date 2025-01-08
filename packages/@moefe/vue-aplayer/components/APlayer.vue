@@ -33,6 +33,7 @@ import Player, { type Notice } from './Player.vue';
 import Lyric from './Lyric.vue';
 import { events, ReadyState } from '@moefe/vue-audio';
 import VueAudio from '@moefe/vue-audio';
+import { parseBlob } from 'music-metadata';
 
 const props = withDefaults(defineProps<Options>(), {
   fixed: false,
@@ -544,8 +545,43 @@ const getThemeColorFromCover = (url: string): Promise<string> => {
   });
 }
 
+const base64ToBlob = (base64: string, mime: string) => {
+    mime = mime || '';
+    var sliceSize = 1024;
+    var byteChars = window.atob(base64);
+    var byteArrays = [];
+
+    for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+      var slice = byteChars.slice(offset, offset + sliceSize);
+
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      var byteArray = new Uint8Array(byteNumbers);
+
+      byteArrays.push(byteArray);
+    }
+
+    return new Blob(byteArrays, {type: mime});
+  }
+
 const getAudioUrl = async (audio: APlayer.Audio): Promise<string> => {
-  //TODO: Implement getAudioUrl to also load audio based on base64
+  if (audio.url.match(/^data:/)) {
+    const [mimeType, base64Data] = audio.url.split(',');
+    const blob = base64ToBlob(base64Data, mimeType.split(':')[1]);
+    const metadata = await parseBlob(blob);
+    console.log("metadata: ", metadata)
+    const image = metadata.common.picture?.[0];
+    if (image) {
+      audio.cover = URL.createObjectURL(new Blob([image.data], { type: image.format }));
+    }
+    const lyrics = metadata.common.lyrics;
+    if (lyrics && lyrics.length > 0) {
+      audio.lrc = lyrics[0].text;
+    }
+  }
   return audio.url;
 }
 
@@ -625,7 +661,8 @@ const mediaState = computed(() => {
   return media.value?.state;
 })
 
-provide('aplayer', props && {
+provide('aplayer', {
+  ...props,
   options: store?.store.value[0],
   listMaxHeight: props.listMaxHeight,
   currentProps: props,

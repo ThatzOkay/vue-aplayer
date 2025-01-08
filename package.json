@@ -33,9 +33,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "Buffer": "^0.0.0",
+    "base64toblob": "^0.0.2",
     "classnames": "^2.5.1",
     "colorthief": "^2.6.0",
     "hls.js": "^1.5.18",
+    "music-metadata": "^10.6.5",
     "ua-parser-js": "^2.0.0",
     "vue": "^3.5.13"
   },

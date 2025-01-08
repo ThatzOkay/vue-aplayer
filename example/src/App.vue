@@ -37,7 +37,7 @@ const aplayer0 = ref<APlayerOptions>({
 });
 
 const aplayer1 = ref<APlayerOptions>({
-  lrcType: 3,
+  lrcType: 1,
   listMaxHeight: 100,
   preload: 'auto',
   audio: [],

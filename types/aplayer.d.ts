@@ -23,7 +23,7 @@ declare global {
       [index: number]: this;
 
       id?: number;
-      name: string | VNode; 
+      name: string | VNode;
       artist: string | VNode;
       url: string;
       cover?: string;
