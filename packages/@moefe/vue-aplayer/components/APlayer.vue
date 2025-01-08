@@ -145,7 +145,12 @@ const shuffle = <T>(list: T[]) => {
   return result;
 }
 
-const currentIndex = computed(() => orderList.value.findIndex(item => item.id === currentMusic.value.id || item.url === currentMusic.value.url));
+const currentIndex = computed(() => {
+  const item = orderList.value.filter(item => item.id === currentMusic.value.id);
+  const index = item.length > 0 ? orderList.value.indexOf(item[0]) : -1;
+  return index;
+});
+
 const listScrollTop = ref(currentIndex.value * 33);
 const currentVolume = ref(props.volume);
 const currentTheme = ref<string>(currentMusic.value.theme || props.theme);
@@ -365,7 +370,6 @@ watch(() => orderList.value, handleChangePlayList, { immediate: true, deep: true
 watch(() => currentMusic.value, handleChangeCurrentMusic);
 watch(() => props.volume, handleChangeVolume);
 watch(() => currentVolume.value, handleChangeCurrentVolume);
-watch(() => media.value?.state.ended, handleChangeEnded);
 watch(() => media.value?.state.currentTime, handleChangeCurrentTime);
 watch(() => media.value?.$data, handleChangeSettings, { deep: true });
 watch(() => media.value?.state.ended, handleChangeEnded);
