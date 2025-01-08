@@ -44,7 +44,6 @@ const playedStyle = computed(() => ({
 const handleChangeProgress = inject('handleChangeProgress') as (e: MouseEvent | TouchEvent, percent: number) => void;
 
 const handleChange = (e: MouseEvent | TouchEvent) => {
-  console.log('handleChange progress bar');
   if (!progressBar.value) {
     return;
   }

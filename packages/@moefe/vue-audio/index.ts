@@ -16,7 +16,7 @@ export default defineComponent({
   name: 'VueAudio',
   setup() {
     const audio = new Audio();
-
+    audio.loop = false;
     audio.volume = 0;
     // Define the type of the state
     const state = reactive({

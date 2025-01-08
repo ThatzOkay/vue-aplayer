@@ -104,7 +104,6 @@ const orderList = computed(() =>
 const shuffleTrigger = ref(0);
 
 const currentLoaded = computed(() => {
-  console.log("crrentLoaded computed")
   if (!media.value) return 0;
   if (media.value.state.readyState < ReadyState.HAVE_FUTURE_DATA) return 0;
   const { length } = media.value?.state.buffered;
@@ -146,7 +145,7 @@ const shuffle = <T>(list: T[]) => {
   return result;
 }
 
-const currentIndex = ref(orderList.value.findIndex(item => item.id === currentMusic.value.id || item.url === currentMusic.value.url));
+const currentIndex = computed(() => orderList.value.findIndex(item => item.id === currentMusic.value.id || item.url === currentMusic.value.url));
 const listScrollTop = ref(currentIndex.value * 33);
 const currentVolume = ref(props.volume);
 const currentTheme = ref<string>(currentMusic.value.theme || props.theme);
@@ -296,6 +295,7 @@ const handleChangeSettings = () => {
 }
 
 const handleChangeEnded = () => {
+  console.log("handleChangeEnded")
   if (!media.value?.state.ended) return;
   currentPlayed.value = 0;
   switch (currentLoop.value) {
@@ -365,6 +365,7 @@ watch(() => orderList.value, handleChangePlayList, { immediate: true, deep: true
 watch(() => currentMusic.value, handleChangeCurrentMusic);
 watch(() => props.volume, handleChangeVolume);
 watch(() => currentVolume.value, handleChangeCurrentVolume);
+watch(() => media.value?.state.ended, handleChangeEnded);
 watch(() => media.value?.state.currentTime, handleChangeCurrentTime);
 watch(() => media.value?.$data, handleChangeSettings, { deep: true });
 watch(() => media.value?.state.ended, handleChangeEnded);
@@ -437,6 +438,7 @@ const seek = (time: number) => {
 }
 
 const switchAudio = (audio: number | string) => {
+  console.log("switching audio")
   switch (typeof audio) {
     case 'number':
       currentMusic.value = orderList.value[
@@ -457,7 +459,9 @@ const skipBackward = () => {
 }
 
 const skipForward = () => {
+  console.log("skipForward")
   const playIndex = getPlayIndexByMode('skipForward');
+  console.log("playIndex: ", playIndex)
   currentMusic.value = { ...orderList.value[playIndex] };
   emit('skipForward');
 }
@@ -544,6 +548,7 @@ const getAudioUrl = async (audio: APlayer.Audio): Promise<string> => {
 const getPlayIndexByMode = (type: 'skipBackward' | 'skipForward'): number => {
   const length = orderList.value.length;
   const index = currentIndex.value;
+  console.log("current index: ", index)
   return (type === 'skipBackward' ? length + (index - 1) : index + 1) % length;
 }
 
