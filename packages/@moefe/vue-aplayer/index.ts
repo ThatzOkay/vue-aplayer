@@ -1,7 +1,9 @@
 import type { App } from "vue";
 import type { Plugin } from "vue";
-import { default as APlayerPlayer } from "./components/APlayer.vue";
+import APlayer from "./components/APlayer.vue";
 import { usePlayerStore } from "@moefe/vue-store";
+
+export { APlayer };
 
 const APlayerPlugin: Plugin = {
   install(app: App, options: APlayer.InstallOptions = {}) {
@@ -12,9 +14,10 @@ const APlayerPlugin: Plugin = {
     const opts = { ...defaultOptions, ...options };
     Object.assign(this, { options: opts });
 
-    app.component("aplayer", APlayerPlayer);
-    app.component("Aplayer", APlayerPlayer);
-    app.component("a-player", APlayerPlayer);
+    app.component("aplayer", APlayer);
+    app.component("Aplayer", APlayer);
+    app.component("APlayer", APlayer);
+    app.component("a-player", APlayer);
 
     const store = usePlayerStore();
 

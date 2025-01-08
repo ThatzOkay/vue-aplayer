@@ -2,7 +2,7 @@
     <ol ref="list" class="aplayer-list" :style="style">
         <li v-for="(item, index) in dataSource" :key="item.id" :class="classNames({
             'aplayer-list-light': item.id === currentMusic?.id,
-        })" @click="handleClick(item)">
+        })" @click="handleClick(item, index)">
             <span class="aplayer-list-cur" :style="{ backgroundColor: aplayer?.currentTheme}" />
             <span class="aplayer-list-index">{{index + 1}}</span>
             <span class="aplayer-list-title">{{item.name}}</span>
@@ -60,7 +60,7 @@ watch(() => props.scrollTop, () => handleChangeScrollTop(), { immediate: true })
 watch(() => props.dataSource, () => handleChangeScrollTop(), { immediate: true });
 watch(() => props.visible, () => handleChangeScrollTop());
 
-const handleClick = (item: APlayer.Audio) => {
-    emit('change', item);
+const handleClick = (item: APlayer.Audio, index: number) => {
+    emit('change', item, index);
 }
 </script>

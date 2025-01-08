@@ -608,6 +608,8 @@ const handleMiniSwitcher = () => {
 }
 
 const handleChangePlaylist = (music: APlayer.Audio, index: number) => {
+  console.log("music: ", music)
+  console.log("index: ", index)
   if (music.id === currentMusic.value.id) handleTogglePlay();
   else currentMusic.value = orderList.value[index];
 }

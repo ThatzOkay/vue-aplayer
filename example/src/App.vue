@@ -4,7 +4,7 @@
     <h1>Vue-Aplayer</h1>
     <h3>🍰 A beautiful HTML5 music player for Vue.js.</h3>
     <div class="aplayer-wrap">
-      <a-player :lrcType="aplayer1.lrcType" :listMaxHeight="aplayer1.listMaxHeight" :preload="aplayer1.preload" :audio="aplayer1.audio"  />
+      <a-player :lrcType="aplayer1.lrcType" :listMaxHeight="aplayer1.listMaxHeight" :preload="aplayer1.preload" :audio="aplayer1.audio" :listFolded="aplayer1.listFolded"  />
     </div>
     <div class="landing-buttons">
       <a class="landing-button" href="https://github.com/MoePlayer/vue-aplayer" target="_blank">
@@ -26,6 +26,7 @@ import { onMounted, ref } from 'vue';
 import Hls from 'hls.js';
 import { sleep } from 'utils/index';
 import * as music from './assets/music/data.json'
+import { APlayer } from '@moefe/vue-aplayer';
 
 const aplayer0 = ref<APlayerOptions>({
   fixed: true,
@@ -40,6 +41,7 @@ const aplayer1 = ref<APlayerOptions>({
   listMaxHeight: 100,
   preload: 'auto',
   audio: [],
+  listFolded: true,
 })
 
 onMounted(async () => {
