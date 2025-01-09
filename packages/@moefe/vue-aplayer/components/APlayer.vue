@@ -156,21 +156,6 @@ const handleNewPlaylist = (audio: APlayer.Audio | APlayer.Audio[]) => {
 
 watch(() => props.audio, handleNewPlaylist, { immediate: true });
 
-// const dataSource = computed((): APlayer.Audio[] => {
-//   const data = (Array.isArray(props.audio) ? props.audio : [props.audio])
-//     .filter(x => x)
-//     .map((item, index) => ({
-//       id: index + 1,
-//       ...item,
-//     }));
-//     s.value = data.map(({ name, artist, ...item }) => ({
-//     ...item,
-//     name: text(name, 'name'),
-//     artist: text(artist, 'artist'),
-//   }));
-//   return data;
-// });
-
 const shuffleTrigger = ref(0);
 
 const currentLoaded = computed(() => {
@@ -233,7 +218,26 @@ const notice = ref<Notice>({
 });
 
 const reshuffle = () => {
-  shuffleTrigger.value++;
+  const currentDataSource = dataSource.value;
+  const currentPlaying = currentMusic.value;
+
+  const item = currentDataSource.filter(item => item.id === currentPlaying.id);
+
+  const index = item.length > 0 ? currentDataSource.indexOf(item[0]) : -1;
+  if (index > -1) {
+    currentDataSource.splice(index, 1);
+  }
+
+  const data = shuffle(currentDataSource)
+  data.unshift(currentPlaying);
+  const newList = data.map(({ name, artist, ...item }) => ({
+    ...item,
+    name: text(name, 'name'),
+    artist: text(artist, 'artist'),
+  }));
+
+  dataSource.value = data;
+  orderList.value = newList;
 };
 
 const handleChangeCurrentMusic = async (
@@ -645,6 +649,20 @@ const handleToggleOrderMode = () => {
   if (currentOrder.value === 'list') {
     console.log('reshuffle')
     reshuffle();
+  } else {
+    const data = (Array.isArray(props.audio) ? props.audio : [props.audio])
+      .filter(x => x)
+      .map((item, index) => ({
+        id: index + 1,
+        ...item,
+      }));
+    const newList = data.map(({ name, artist, ...item }) => ({
+      ...item,
+      name: text(name, 'name'),
+      artist: text(artist, 'artist'),
+    }));
+    dataSource.value = data;
+    orderList.value = newList;
   }
   currentOrder.value = currentOrder.value === 'list' ? 'random' : 'list';
 }
