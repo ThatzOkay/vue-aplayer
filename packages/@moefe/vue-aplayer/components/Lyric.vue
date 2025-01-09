@@ -91,6 +91,14 @@ const parseLRC = (lrc: string): Array<LRC> => {
         parsed.sort((a, b) => a.time - b.time);
     }
 
+    if(lrc === '') {
+        parsed.push({ time: 0, text: noLyrics() });
+    } else {
+      lrc
+        .replace(/\\n/g, '\n')
+        .split('\n').forEach(line => parsed.push({ time: 0, text: line }));
+    }
+
     return parsed.length > 0 ? parsed : [{ time: 0, text: lrc !== '' ? lrc : noLyrics() }];
 }
 
@@ -136,7 +144,6 @@ const parsed = () => {
 }
 
 const current = computed(() => {
-    console.log("parsed: ", parsed())
     const match = parsed().filter(
         x => x.time < aplayer.currentPlayed.value * aplayer.media.value.duration * 1000,)
     if (match && match.length > 0) return match[match.length - 1];
@@ -151,10 +158,10 @@ const translateY = computed(() => {
     return (isLast ? (index - 1) * 16 : index * 16) * -1;
 })
 
-const style = ref({
+const style = computed(() => ({
     transform: `${transitionDuration}`,
     transition: `translate3d(0, ${translateY}px, 0)`,
-});
+}));
 
 const handleChange = async () => {
     try {

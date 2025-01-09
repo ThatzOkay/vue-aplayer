@@ -1,7 +1,7 @@
 <template>
   <div ref="container" :class="classNames({
     aplayer: true,
-    'aplayer-withlist': dataSource.length > 1,
+    'aplayer-withlist': (dataSource?.length ?? 0) > 1,
     'aplayer-withlrc': !fixed && (lrcType !== 0 && lyricVisible),
     'aplayer-narrow': isMini,
     'aplayer-fixed': fixed,
@@ -34,6 +34,7 @@ import Lyric from './Lyric.vue';
 import { events, ReadyState } from '@moefe/vue-audio';
 import VueAudio from '@moefe/vue-audio';
 import { parseBlob } from 'music-metadata';
+import type { AudioType } from 'types';
 
 const props = withDefaults(defineProps<Options>(), {
   fixed: false,
@@ -82,25 +83,93 @@ const text = (vnode: string | VNode, key: string): string =>
 
 // this will be the main data source for the player and playlist. When user presses shuffle. Shuffle this list.
 // If currently playing a song. remove from list then shuffle then add to beginning of list
-const dataSource = computed((): APlayer.Audio[] => {
-  if (currentOrder.value === 'list') {
-    return (Array.isArray(props.audio) ? props.audio : [props.audio])
-      .filter(x => x)
-      .map((item, index) => ({
-        id: index + 1,
-        ...item,
-      }));
-  }
-  return [];
-});
+const dataSource = ref<APlayer.Audio[]>([]);
 
-const orderList = computed(() =>
-  dataSource.value.map(({ name, artist, ...item }) => ({
+const orderList = ref<{
+  name: string;
+  artist: string;
+  id?: number;
+  url: string;
+  cover?: string;
+  lrc?: string;
+  theme?: string;
+  type?: AudioType;
+  speed?: number;
+}[]>([]);
+
+const handleChangePlayList = async (
+  newList: APlayer.Audio[],
+  oldList?: APlayer.Audio[],
+) => {
+  console.log("changing playlist handleChangePlayList")
+  if (oldList) {
+    const newLength = newList.length;
+    const oldLength = oldList.length;
+    if (oldLength !== 0) {
+      if (newLength !== oldLength) {
+        if (newLength <= 0) emit('listClear');
+        else if (newLength > oldLength) emit('listAdd');
+        else {
+          if (currentIndex.value < 0) {
+            const { id, url } = currentMusic.value;
+            const oldIndex = oldList.findIndex(
+              item => item.id === id || item.url === url,
+            );
+            currentMusic.value = oldList[oldIndex - 1];
+          }
+          canPlay.value = !player.value.paused;
+          emit('listRemove');
+        }
+      }
+    }
+  }
+
+  if (orderList.value.length > 0) {
+    if (!currentMusic.value.id) {
+      [currentMusic.value] = orderList.value;
+    } else {
+      canPlay.value = !player.value.paused;
+      const music =
+        orderList.value[currentIndex.value] || orderList.value[0];
+      currentMusic.value = music;
+    }
+    canPlay.value = true;
+  }
+}
+
+const handleNewPlaylist = (audio: APlayer.Audio | APlayer.Audio[]) => {
+  const data = (Array.isArray(audio) ? audio : [audio])
+    .filter(x => x)
+    .map((item, index) => ({
+      id: index + 1,
+      ...item,
+    }));
+  const newList = data.map(({ name, artist, ...item }) => ({
     ...item,
     name: text(name, 'name'),
     artist: text(artist, 'artist'),
-  }))
-);
+  }));
+  orderList.value = newList;
+  handleChangePlayList(data, dataSource.value);
+  dataSource.value = data;
+}
+
+watch(() => props.audio, handleNewPlaylist, { immediate: true });
+
+// const dataSource = computed((): APlayer.Audio[] => {
+//   const data = (Array.isArray(props.audio) ? props.audio : [props.audio])
+//     .filter(x => x)
+//     .map((item, index) => ({
+//       id: index + 1,
+//       ...item,
+//     }));
+//     s.value = data.map(({ name, artist, ...item }) => ({
+//     ...item,
+//     name: text(name, 'name'),
+//     artist: text(artist, 'artist'),
+//   }));
+//   return data;
+// });
 
 const shuffleTrigger = ref(0);
 
@@ -133,7 +202,7 @@ const currentMusic = ref<APlayer.Audio>({
   artist: '(ಗ ‸ ಗ )',
   url: '',
 });
-const lyricVisible = ref(true);
+const lyricVisible = ref(false);
 const img = ref(new Image());
 
 const shuffle = <T>(list: T[]) => {
@@ -166,44 +235,6 @@ const notice = ref<Notice>({
 const reshuffle = () => {
   shuffleTrigger.value++;
 };
-
-const handleChangePlayList = async (
-  newList: APlayer.Audio[],
-  oldList?: APlayer.Audio[],
-) => {
-  console.log("changing playlist handleChangePlayList")
-  if (oldList) {
-    const newLength = newList.length;
-    const oldLength = oldList.length;
-    if (newLength !== oldLength) {
-      if (newLength <= 0) emit('listClear');
-      else if (newLength > oldLength) emit('listAdd');
-      else {
-        if (currentIndex.value < 0) {
-          const { id, url } = currentMusic.value;
-          const oldIndex = oldList.findIndex(
-            item => item.id === id || item.url === url,
-          );
-          currentMusic.value = oldList[oldIndex - 1];
-        }
-        canPlay.value = !player.value.paused;
-        emit('listRemove');
-      }
-    }
-  }
-
-  if (orderList.value.length > 0) {
-    if (!currentMusic.value.id) {
-      [currentMusic.value] = orderList.value;
-    } else {
-      canPlay.value = !player.value.paused;
-      const music =
-        orderList.value[currentIndex.value] || orderList.value[0];
-      currentMusic.value = music;
-    }
-    canPlay.value = true;
-  }
-}
 
 const handleChangeCurrentMusic = async (
   newMusic: APlayer.Audio,
@@ -367,7 +398,7 @@ const handleChangeLyricVisible = () => {
   // handleChangeSettings();
 }
 
-watch(() => orderList.value, handleChangePlayList, { immediate: true, deep: true });
+// watch(() => orderList.value, handleChangePlayList, { immediate: true, deep: true });
 watch(() => currentMusic.value, handleChangeCurrentMusic);
 watch(() => props.volume, handleChangeVolume);
 watch(() => currentVolume.value, handleChangeCurrentVolume);
@@ -546,26 +577,26 @@ const getThemeColorFromCover = (url: string): Promise<string> => {
 }
 
 const base64ToBlob = (base64: string, mime: string) => {
-    mime = mime || '';
-    var sliceSize = 1024;
-    var byteChars = window.atob(base64);
-    var byteArrays = [];
+  mime = mime || '';
+  var sliceSize = 1024;
+  var byteChars = window.atob(base64);
+  var byteArrays = [];
 
-    for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
-      var slice = byteChars.slice(offset, offset + sliceSize);
+  for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+    var slice = byteChars.slice(offset, offset + sliceSize);
 
-      var byteNumbers = new Array(slice.length);
-      for (var i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-
-      var byteArray = new Uint8Array(byteNumbers);
-
-      byteArrays.push(byteArray);
+    var byteNumbers = new Array(slice.length);
+    for (var i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
     }
 
-    return new Blob(byteArrays, {type: mime});
+    var byteArray = new Uint8Array(byteNumbers);
+
+    byteArrays.push(byteArray);
   }
+
+  return new Blob(byteArrays, { type: mime });
+}
 
 const getAudioUrl = async (audio: APlayer.Audio): Promise<string> => {
   if (audio.url.match(/^data:/)) {
@@ -673,7 +704,8 @@ provide('aplayer', {
   currentOrder: currentOrder,
   currentPlayed: currentPlayed,
   currentLoaded: currentLoaded,
-  media: mediaState
+  media: mediaState,
+  lyricVisible: lyricVisible,
 });
 
 onMounted(() => {

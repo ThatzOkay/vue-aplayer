@@ -41,7 +41,11 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
       .aplayer-icon.aplayer-icon-menu {
       display: inline;
     }
-    .aplayer-icon-order {
+    .aplayer-icon-order,
+    .aplayer-icon-back,
+    .aplayer-icon-play,
+    .aplayer-icon-forward,
+    .aplayer-icon-lrc {
       display: inline;
     }
   }
@@ -241,13 +245,13 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     }
   }
 
-  .aplayer-icon-order,
-  .aplayer-icon-back,
-  .aplayer-icon-play,
-  .aplayer-icon-forward,
-  .aplayer-icon-lrc {
-    display: none;
-  }
+  // .aplayer-icon-order,
+  // .aplayer-icon-back,
+  // .aplayer-icon-play,
+  // .aplayer-icon-forward,
+  // .aplayer-icon-lrc {
+  //   display: none;
+  // }
 
   .aplayer-icon-lrc-inactivity {
     svg {
@@ -351,7 +355,6 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      margin: 0 0 13px 5px;
       user-select: text;
       cursor: default;
       padding-bottom: 2px;
@@ -483,7 +486,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
         .aplayer-volume-bar-wrap {
           position: absolute;
-          bottom: 15px;
+          bottom: 20px;
           right: -3px;
           width: 25px;
           height: 0;

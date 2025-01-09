@@ -6,15 +6,9 @@
         <span class="aplayer-ptime">{{ ptime }}</span> /
         <span class="aplayer-dtime">{{ dtime }}</span>
       </span>
-      <span class="aplayer-icon aplayer-icon-back" @click="handleSkipBackward">
-        <Icon type="skip" />
-      </span>
-      <span class="aplayer-icon aplayer-icon-play" @click="handleTogglePlay">
-        <Icon :type="playIcon" />
-      </span>
-      <span class="aplayer-icon aplayer-icon-forward" @click="handleSkipForward">
-        <Icon type="skip" />
-      </span>
+      <Button type="back" icon="skip" @click="handleSkipBackward" />
+      <Button :type="playIcon" :icon="playIcon" @click="handleTogglePlay" />
+      <Button type="forward" icon="skip" @click="handleSkipForward" />
       <div class="aplayer-volume-wrap">
         <Button :type="`volume-${volumeIcon}`" :icon="`volume-${volumeIcon}`" @click="handleToggleVolume" />
         <VueTouch class="aplayer-volume-bar-wrap" @on-pan-move="handlePanMove">
@@ -41,6 +35,7 @@ import Button from './Button.vue';
 import VueTouch from '@moefe/vue-touch/VueTouch.vue';
 import { inject, ref, type Ref, type ComputedRef, computed } from 'vue';
 import type { Options } from 'types/options';
+import type { LrcType } from 'types';
 
 const volumeBar = ref<HTMLElement | null>(null);
 
@@ -52,6 +47,7 @@ const aplayer = inject<Options & {
   currentLoop: Ref<APlayer.LoopMode>;
   currentOrder: Ref<APlayer.OrderMode>;
   currentProps: Options;
+  lrctype: Ref<LrcType>;
 }>('aplayer')!;
 
 const handleSkipBackward = inject('handleSkipBackward') as () => void;

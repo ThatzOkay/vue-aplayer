@@ -4,7 +4,7 @@
             <span class="aplayer-title">{{ music.name }}</span>
             <span class="aplayer-author"> - {{ music.artist }}</span>
         </div>
-        <Lyric v-if="!aplayer.fixed" />
+        <Lyric v-if="!aplayer.fixed" :visible="aplayer.lyricVisible.value" />
         <slot></slot>
     </div>
 </template>
@@ -19,6 +19,7 @@ const aplayer = inject<Options & {
     currentTheme: Ref<string>;
     currentMusic: Ref<APlayer.Audio>;
     media: Ref<APlayer.Media>;
+    lyricVisible: Ref<boolean>;
 }>('aplayer')!;
 
 const music = computed(() => {
@@ -27,4 +28,5 @@ const music = computed(() => {
         artist: aplayer.currentMusic.value.artist
     }
 })
+
 </script>
