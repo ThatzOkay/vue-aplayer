@@ -1,20 +1,64 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import path from 'path'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import path from "path";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 // https://vite.dev/config/
-export default defineConfig({
+const commonConfig = defineConfig({
   plugins: [vue()],
-  define: {
-    APLAYER_VERSION: JSON.stringify(await import('./package.json').then((pkg) => pkg.version)),
-  },
   resolve: {
     alias: {
-      utils: path.resolve(__dirname, 'utils'),
-      '@moefe/vue-audio': path.resolve(__dirname, 'packages/@moefe/vue-audio'),
-      '@moefe/vue-store': path.resolve(__dirname, 'packages/@moefe/vue-store'),
-      '@moefe/vue-touch': path.resolve(__dirname, 'packages/@moefe/vue-touch'),
-      '@moefe/vue-aplayer': path.resolve(__dirname, 'packages/@moefe/vue-aplayer'),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
-})
+});
+
+const libConfig = defineConfig({
+  ...commonConfig,
+  build: {
+    minify: true,
+    lib: {
+      entry: path.resolve(__dirname, "src/index.ts"),
+      name: "VueAPlayer",
+      fileName: (format) => `aplayer.${format}.js`,
+    },
+    rollupOptions: {
+      external: ["vue"],
+      output: {
+        globals: {
+          vue: "Vue",
+        },
+      },
+    },
+  },
+  plugins: [
+    vue(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "src/assets/style/vue-aplayer.scss", // Path to your SCSS file
+          dest: "scss/", // Destination directory in the dist folder
+        },
+      ],
+    }),
+  ],
+});
+
+const demoConfig = defineConfig({
+  ...commonConfig,
+  root: "./demo",
+});
+
+export default defineConfig(({ command }) => {
+  const executionMode: "lib" | "demo" =
+    (process.env.MODE as "lib" | "demo") || "lib";
+
+  const mode = command === "build" ? "production" : "development";
+
+  if (executionMode === "demo") {
+    return { ...demoConfig, mode };
+  } else if (executionMode === "lib") {
+    return { ...libConfig, mode };
+  }
+  return commonConfig;
+});
