@@ -25,7 +25,7 @@
   "type": "module",
   "files": [
     "dist",
-    "dist/scss"
+    "dist/scss/**/*"
   ],
   "main": "./dist/aplayer.umd.js",
   "module": "./dist/aplayer.es.js",

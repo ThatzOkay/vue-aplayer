@@ -5,13 +5,13 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@moefe/vue-aplayer"><img alt="NPM version" src="https://img.shields.io/npm/v/@moefe/vue-aplayer.svg?style=for-the-badge" /></a>
-  <a href="https://travis-ci.org/MoePlayer/vue-aplayer"><img alt="Build Status" src="https://img.shields.io/travis/MoePlayer/vue-aplayer/dev.svg?style=for-the-badge"></a>
+  <a href="https://www.npmjs.com/package/@thatzokay/vue-aplayer"><img alt="NPM version" src="https://img.shields.io/npm/v/@thatzokay/vue-aplayer.svg?style=for-the-badge" /></a>
+  <a href="https://github.com/ThatzOkay/vue-aplayer/actions/workflows/npm-publish.yml"><img alt="Build Status" src="https://github.com/ThatzOkay/vue-aplayer/actions/workflows/npm-publish.yml/badge.svg"></a>
   <a href="./LICENSE"><img alt="LICENSE MIT" src="https://img.shields.io/badge/license-mit-blue.svg?style=for-the-badge"></a>
   <a href="https://github.com/prettier/prettier"><img alt="Code Style: Prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge"></a>
 </p>
 
-> This is the branch for `@moefe/vue-aplayer` 2.0.
+> This is the branch for `@thatzokay/vue-aplayer` 3.
 
 ## Status: Beta
 
@@ -19,25 +19,24 @@ Most of the planned features are in place but there may still be bugs.
 
 ## Documentation
 
-Docs are available at [aplayer.moefe.org/docs/](https://aplayer.moefe.org/docs/)
+Docs are available at [aplayer.thatzokay.nl/docs/](https://aplayer.thatzokay.nl/docs/)
 
 ## Install
 
 ```bash
-yarn add @moefe/vue-aplayer
+npm install @thatzokay/
 ```
 
 ## Usage
 
-[![Edit vue-aplayer](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/xrylkkp27w?fontsize=12&module=%2Fsrc%2FApp.vue)
+[![Edit vue-aplayer](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/live/be08887f-73ca-424b-ae3f-126de348fc9d)
 
 ```js
 import Vue from 'vue';
-import APlayer from '@moefe/vue-aplayer';
+import { VueAPlayerPlugin } from '@thatzokay/vue-aplayer';
 
 Vue.use(APlayer, {
   defaultCover: 'https://github.com/u3u.png', // set the default cover
-  productionTip: false, // disable console output
 });
 ```
 
@@ -45,6 +44,7 @@ Vue.use(APlayer, {
 
 - [APlayer](https://github.com/MoePlayer/APlayer): Original project, thanks [@DIYgod](https://github.com/DIYgod)
 - [Vue-Aplayer](https://github.com/SevenOutman/vue-aplayer): Another Vue implementation of APlayer by [@SevenOutman](https://github.com/SevenOutman)
+- [Vue-Aplayer](https://github.com/MoePlayer/vue-aplayer): Originally forked from [@MoePlayer](https://github.com/MoePlayer)
 
 ## Contributing
 
