@@ -1,5 +1,6 @@
 {
-  "name": "vue-aplayer",
+  "name": "@thatzokay/vue-aplayer",
+  "private": false,
   "description": "A beautiful HTML5 music player for Vue.js",
   "version": "3.0.0",
   "author": "ThatzOkay",
