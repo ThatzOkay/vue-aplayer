@@ -23,10 +23,9 @@
     "media"
   ],
   "type": "module",
-  "files": [
-    "dist",
-    "dist/scss/**/*"
-  ],
+  "directories": {
+    "dist": "dist"
+  },
   "main": "./dist/aplayer.umd.js",
   "module": "./dist/aplayer.es.js",
   "typings": "./dist/types/src/index.d.ts",
