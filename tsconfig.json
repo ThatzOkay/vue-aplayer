@@ -1,32 +1,35 @@
 {
   "compilerOptions": {
-    "target": "esnext",
     "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "allowSyntheticDefaultImports": true,
+    "target": "esnext",
+    "useDefineForClassFields": true,
     "sourceMap": true,
-    "baseUrl": ".",
-    "types": ["node", "hls.js"],
+    "strict": true,
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "paths": {
-      "utils/*": ["utils/*"],
-      "@moefe/vue-audio": ["packages/@moefe/vue-audio/index.ts"],
-      "@moefe/vue-store": ["packages/@moefe/vue-store/index.ts"],
-      "@moefe/vue-touch": ["packages/@moefe/vue-touch/index.tsx"],
-      "@moefe/vue-aplayer": ["packages/@moefe/vue-aplayer/index.ts"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
-    "types/**/*.ts",
-    "example/**/*.ts",
-    "example/**/*.tsx",
-    "packages/**/*.ts",
-    "packages/**/*.tsx",
-    "utils/**/*.ts",
-    "node_modules/@types/",
-    "node_modules/vue-tsx-support/enable-check.d.ts"
-  ]
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "demo/**/*.ts",
+    "demo/**/*.d.ts",
+    "demo/**/*.tsx",
+    "demo/**/*.vue"
+  ],
+  "exclude": ["node_modules", "docs"]
 }

@@ -1,66 +1,45 @@
-const path = require('path');
+import { viteBundler } from '@vuepress/bundler-vite'
+import { defaultTheme } from '@vuepress/theme-default'
+import { defineUserConfig } from 'vuepress'
 
-module.exports = {
-  base: '/docs/',
-  title: 'vue-aplayer',
-  description: '🍰 A beautiful HTML5 music player for Vue.js',
-  head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['script', { src: 'https://cdn.jsdelivr.net/npm/hls.js' }],
-    ['script', { src: 'https://cdn.jsdelivr.net/npm/colorthief' }], // prettier-ignore
-  ],
-  dest: 'demo/docs',
-  plugins: [
-    [
-      '@vuepress/pwa',
-      {
-        serviceWorker: true,
-        updatePopup: {
-          message: '发现新内容可用',
-          buttonText: '刷新',
+export default defineUserConfig({
+    bundler: viteBundler(),
+    theme: defaultTheme(),
+    base: '/docs/',
+    title: 'vue-aplayer',
+    description: '🍰 A beautiful Vue.js HTML5 music player',
+    head: [
+        ['link', { rel: 'icon', href: '/favicon.ico' }],
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/hls.js' }],
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/colorthief' }], // prettier-ignore
+    ],
+    themeConfig: {
+        nav: [
+            { text: 'Guide', link: '/guide/' },
+            { text: 'Options', link: '/options/' },
+            { text: 'API', link: '/api/' },
+        ],
+        sidebar: {
+            '/guide/': [
+                '',
+                'options',
+                'api',
+                'events',
+                'lrc',
+                'playlist',
+                'fixed',
+                'mini',
+                'hls',
+                'theme',
+                'cdn',
+                'faq',
+            ],
         },
-      },
-    ],
-    [
-      '@vuepress/last-updated',
-      {
-        transformer: (timestamp) => {
-          const dayjs = require('dayjs');
-          return dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss');
-        },
-      },
-    ],
-  ],
-  themeConfig: {
-    nav: [
-      { text: '指南', link: '/guide/' },
-      { text: '选项', link: '/options/' },
-      { text: 'API', link: '/api/' },
-    ],
-    sidebar: {
-      '/guide/': [
-        '',
-        'options',
-        'api',
-        'events',
-        'lrc',
-        'playlist',
-        'fixed',
-        'mini',
-        'hls',
-        'theme',
-        'cdn',
-        'faq',
-      ],
+        repo: 'MoePlayer/vue-aplayer',
+        docsDir: 'docs',
+        docsBranch: 'dev',
+        editLinks: true,
+        editLinkText: 'Edit this page on GitHub',
+        lastUpdated: 'Last Updated',
     },
-    repo: 'MoePlayer/vue-aplayer',
-    docsDir: 'docs',
-    docsBranch: 'dev',
-    editLinks: true,
-    editLinkText: '在 GitHub 上编辑此页',
-    lastUpdated: '上次更新',
-  },
-  chainWebpack: (config) => {
-    config.resolve.set('symlinks', false);
-  },
-};
+})

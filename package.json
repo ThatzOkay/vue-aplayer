@@ -1,95 +1,66 @@
 {
-  "name": "@moefe/vue-aplayer",
-  "description": "A beautiful HTML5 music player for Vue.js",
-  "version": "2.0.0-beta.5",
-  "author": "u3u <qwq@qwq.cat>",
-  "license": "MIT",
-  "homepage": "https://github.com/MoePlayer/vue-aplayer#readme",
-  "main": "dist/VueAPlayer.common.js",
-  "unpkg": "dist/VueAPlayer.umd.min.js",
-  "jsdelivr": "dist/VueAPlayer.umd.min.js",
-  "types": "types/index.d.ts",
+  "name": "vue-aplayer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "files": [
     "dist",
-    "types"
+    "dist/scss"
   ],
-  "repository": {
-    "url": "git+https://github.com/MoePlayer/vue-aplayer.git",
-    "type": "git"
+  "main": "./dist/aplayer.umd.js",
+  "module": "./dist/aplayer.es.js",
+  "typings": "./dist/types/src/index.d.ts",
+  "types": "./dist/types/src/index.d.ts",
+  "style": "./dist/vue-aplayer.css",
+  "exports": {
+    ".": {
+      "types": "./dist/types/src/index.d.ts",
+      "style": "./dist/vue-aplayer.css",
+      "import": "./dist/aplayer.es.js",
+      "require": "./dist/aplayer.umd.js"
+    }
   },
-  "bugs": {
-    "url": "https://github.com/MoePlayer/vue-aplayer/issues"
-  },
-  "keywords": [
-    "player",
-    "aplayer",
-    "vue-aplayer",
-    "music",
-    "html5",
-    "audio",
-    "media"
-  ],
   "scripts": {
-    "prepublishOnly": "yarn build",
-    "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build --report --target lib --name VueAPlayer packages/@moefe/vue-aplayer/index.ts",
-    "build:example": "vue-cli-service build --dest demo",
-    "docs:link": "yarn link && yarn link \"@moefe/vue-aplayer\"",
-    "docs:dev": "yarn docs:link && vuepress dev docs --debug --port 3000",
-    "docs:build": "yarn docs:prebuild && vuepress build docs",
-    "docs:prebuild": "yarn build && yarn docs:link",
-    "lint": "vue-cli-service lint packages",
-    "lint:prettier": "prettier-eslint-check \"**/*.{js,jsx,json,ts,tsx,scss,vue,md}\"",
-    "format": "prettier-eslint \"**/*.{js,jsx,json,ts,tsx,scss,vue,md}\" --write",
-    "test:types": "dtslint types",
-    "contributors": "all-contributors"
-  },
-  "peerDependencies": {
-    "vue": "^2.2.0"
+    "dev": "cross-env MODE=demo npm run vite",
+    "vite": "vite",
+    "clean": "rimraf dist",
+    "build": "npm run clean && npm run build:lib && npm run build:tsc",
+    "build:lib": "cross-env MODE=lib vite build",
+    "build:tsc": "vue-tsc --emitDeclarationOnly",
+    "build:demo": "cross-env MODE=demo vite build",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "lint": "eslint ",
+    "lint:fix": "eslint --fix ",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^2.5.17"
+    "hls.js": "^1.5.18",
+    "ua-parser-js": "^2.0.0",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.6",
-    "@types/hls.js": "^0.10.2",
-    "@types/node": "^10.12.12",
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.1",
-    "@vue/cli-plugin-typescript": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
-    "@vue/eslint-config-airbnb": "^4.0.0",
-    "@vue/eslint-config-typescript": "^3.2.0",
-    "@vuepress/plugin-pwa": "^1.0.0-alpha.0",
-    "all-contributors-cli": "^5.4.1",
-    "classnames": "^2.2.6",
-    "dayjs": "^1.7.7",
-    "dtslint": "^0.3.0",
-    "git-revision-webpack-plugin": "^3.0.3",
-    "lint-staged": "^8.1.0",
-    "node-sass": "^4.11.0",
-    "prettier": "^1.15.3",
-    "prettier-eslint-check": "^1.0.2",
-    "prettier-eslint-cli": "^4.7.1",
-    "sass-loader": "^7.1.0",
-    "typescript": "^3.2.2",
-    "vue-class-component": "^6.3.2",
-    "vue-property-decorator": "^7.2.0",
-    "vue-svg-loader": "^0.11.0",
-    "vue-template-compiler": "^2.5.17",
-    "vue-tsx-support": "^2.2.1",
-    "vuepress": "^1.0.0-alpha.27"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue}": "vue-cli-service lint",
-    "*.{js,jsx,json,ts,tsx,scss,vue,md}": "prettier-eslint-check"
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.5",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.7.0",
+    "@vuepress/bundler-vite": "^2.0.0-rc.19",
+    "@vuepress/theme-default": "^2.0.0-rc.69",
+    "classnames": "^2.5.1",
+    "colorthief": "^2.6.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.17.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "globals": "^15.14.0",
+    "music-metadata": "^10.6.5",
+    "postcss": "^8.4.49",
+    "rimraf": "^6.0.1",
+    "sass-embedded": "^1.83.1",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.19.1",
+    "vite": "^6.0.5",
+    "vite-plugin-static-copy": "^2.2.0",
+    "vue-tsc": "^2.2.0",
+    "vuepress": "^2.0.0-rc.19"
   }
 }

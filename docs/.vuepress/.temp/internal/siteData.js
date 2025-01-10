@@ -1,0 +1,1 @@
+export const siteData = JSON.parse("{\"base\":\"/docs/\",\"lang\":\"en-US\",\"title\":\"vue-aplayer\",\"description\":\"🍰 A beautiful Vue.js HTML5 music player\",\"head\":[[\"link\",{\"rel\":\"icon\",\"href\":\"/favicon.ico\"}],[\"script\",{\"src\":\"https://cdn.jsdelivr.net/npm/hls.js\"}],[\"script\",{\"src\":\"https://cdn.jsdelivr.net/npm/colorthief\"}]],\"locales\":{}}")

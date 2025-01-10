@@ -1,0 +1,3 @@
+import comp from "C:/Projects/ts2/vue-aplayer/docs/.vuepress/.temp/pages/guide/lrc.html.vue"
+const data = JSON.parse("{\"path\":\"/guide/lrc.html\",\"title\":\"歌词\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"LRC 格式\",\"slug\":\"lrc-格式\",\"link\":\"#lrc-格式\",\"children\":[]},{\"level\":2,\"title\":\"LRC 文件\",\"slug\":\"lrc-文件\",\"link\":\"#lrc-文件\",\"children\":[]},{\"level\":2,\"title\":\"LRC 字符串\",\"slug\":\"lrc-字符串\",\"link\":\"#lrc-字符串\",\"children\":[]},{\"level\":2,\"title\":\"禁用歌词\",\"slug\":\"禁用歌词\",\"link\":\"#禁用歌词\",\"children\":[]}],\"git\":{},\"filePathRelative\":\"guide/lrc.md\"}")
+export { comp, data }
