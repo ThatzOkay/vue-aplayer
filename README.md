@@ -59,10 +59,22 @@ Vue.use(APlayer, {
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://qwq.cat"><img src="https://avatars2.githubusercontent.com/u/20062482?v=4?s=100" width="100px;" alt="さくら"/><br /><sub><b>さくら</b></sub></a><br /><a href="https://github.com/MoePlayer/vue-aplayer/commits?author=u3u" title="Code">💻</a> <a href="https://github.com/MoePlayer/vue-aplayer/commits?author=u3u" title="Documentation">📖</a> <a href="#example-u3u" title="Examples">💡</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://diygod.me"><img src="https://avatars2.githubusercontent.com/u/8266075?v=4?s=100" width="100px;" alt="DIYgod"/><br /><sub><b>DIYgod</b></sub></a><br /><a href="#design-DIYgod" title="Design">🎨</a> <a href="#ideas-DIYgod" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://forkmeongithub.com/"><img src="https://avatars3.githubusercontent.com/u/27483702?v=4?s=100" width="100px;" alt="Rex Zeng"/><br /><sub><b>Rex Zeng</b></sub></a><br /><a href="https://github.com/MoePlayer/vue-aplayer/issues?q=author%3ARexSkz" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/nunojesus"><img src="https://avatars0.githubusercontent.com/u/34600369?v=4?s=100" width="100px;" alt="Nuno Jesus"/><br /><sub><b>Nuno Jesus</b></sub></a><br /><a href="#design-nunojesus" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ThatzOkay"><img src="https://avatars.githubusercontent.com/u/6585530?v=4?s=100" width="100px;" alt="ThatzOkay"/><br /><sub><b>ThatzOkay</b></sub></a><br /><a href="https://github.com/ThatzOkay/vue-aplayer/commits?author=ThatzOkay" title="Code">💻</a> <a href="https://github.com/ThatzOkay/vue-aplayer/commits?author=ThatzOkay" title="Documentation">📖</a> <a href="#example-ThatzOkay" title="Examples">💡</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<!-- prettier-ignore -->
-| [<img src="https://avatars2.githubusercontent.com/u/20062482?v=4" width="100px;"/><br /><sub><b>さくら</b></sub>](https://qwq.cat)<br />[💻](https://github.com/MoePlayer/vue-aplayer/commits?author=u3u "Code") [📖](https://github.com/MoePlayer/vue-aplayer/commits?author=u3u "Documentation") [💡](#example-u3u "Examples") | [<img src="https://avatars2.githubusercontent.com/u/8266075?v=4" width="100px;"/><br /><sub><b>DIYgod</b></sub>](https://diygod.me)<br />[🎨](#design-DIYgod "Design") [🤔](#ideas-DIYgod "Ideas, Planning, & Feedback") | [<img src="https://avatars3.githubusercontent.com/u/27483702?v=4" width="100px;"/><br /><sub><b>Rex Zeng</b></sub>](https://forkmeongithub.com/)<br />[🐛](https://github.com/MoePlayer/vue-aplayer/issues?q=author%3ARexSkz "Bug reports") | [<img src="https://avatars0.githubusercontent.com/u/34600369?v=4" width="100px;"/><br /><sub><b>Nuno Jesus</b></sub>](https://github.com/nunojesus)<br />[🎨](#design-nunojesus "Design") |
-| :---: | :---: | :---: | :---: |
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
