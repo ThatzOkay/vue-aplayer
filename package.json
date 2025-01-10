@@ -1,7 +1,27 @@
 {
   "name": "vue-aplayer",
-  "private": true,
+  "description": "A beautiful HTML5 music player for Vue.js",
+  "version": "3.0.0",
+  "author": "u3u <qwq@qwq.cat>",
+  "license": "MIT",
+  "homepage": "https://github.com/ThatzOkay/vue-aplayer#readme",
   "version": "0.0.0",
+  "repository": {
+    "url": "git+https://github.com/ThatzOkay/vue-aplayer.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThatzOkay/vue-aplayer/issues"
+  },
+  "keywords": [
+    "player",
+    "aplayer",
+    "vue-aplayer",
+    "music",
+    "html5",
+    "audio",
+    "media"
+  ],
   "type": "module",
   "files": [
     "dist",
