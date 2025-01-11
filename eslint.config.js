@@ -25,7 +25,7 @@ export default [
     },
   },
   {
-    ignores: ["dist/", "docs/", "demo/dist"], // Use `ignores` instead of `ignorePatterns`
+    ignores: ["dist/", "docs/", "demo/dist", "docs-old/"], // Use `ignores` instead of `ignorePatterns`
   },
   {
     rules: {
