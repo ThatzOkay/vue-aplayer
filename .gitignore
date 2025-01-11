@@ -25,3 +25,6 @@ dist-ssr
 docs/.vuepress/dist
 docs/.vuepress/.cache
 docs/.vuepress/.temp
+docs-old/.vuepress/dist
+docs-old/.vuepress/.cache
+docs-old/.vuepress/.temp
