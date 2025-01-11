@@ -65,9 +65,8 @@
   import Lyric from './Lyric.vue';
   import { events, ReadyState } from '@/vue-audio';
   import VueAudio from '@/vue-audio';
-  import { parseBlob, parseBuffer } from 'music-metadata';
+  import { parseBuffer } from 'music-metadata';
   import type { AudioType } from '@/types/aplayer';
-import { UAParser } from 'ua-parser-js';
   
   const props = withDefaults(defineProps<Options>(), {
     fixed: false,
