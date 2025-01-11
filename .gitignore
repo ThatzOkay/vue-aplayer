@@ -28,5 +28,3 @@ docs/.vuepress/.temp
 docs-old/.vuepress/dist
 docs-old/.vuepress/.cache
 docs-old/.vuepress/.temp
-
-package-lock.json
