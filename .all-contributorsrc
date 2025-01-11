@@ -1,6 +1,6 @@
 {
   "projectName": "vue-aplayer",
-  "projectOwner": "MoePlayer",
+  "projectOwner": "ThatzOkay",
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=for-the-badge)](#contributors)",
   "commit": false,
   "contributors": [
@@ -42,7 +42,19 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "ThatzOkay",
+      "name": "ThatzOkay",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6585530?v=4",
+      "profile": "https://github.com/ThatzOkay",
+      "contributions": [
+        "code",
+        "doc",
+        "example"
+      ]
     }
   ],
-  "repoType": "github"
+  "repoType": "github",
+  "commitConvention": "angular"
 }

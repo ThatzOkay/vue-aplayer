@@ -55,6 +55,7 @@
     type VNode,
     nextTick,
     onMounted,
+    Ref,
   } from 'vue';
   import classNames from 'classnames';
   import isMobile from '@/utils';
@@ -195,7 +196,16 @@
       : 1;
   });
   
-  const store = inject('aplayerStore') as { store: InstallOptions } | undefined;
+  const store = inject<{
+    store: Ref<{
+        defaultCover?: string | undefined;
+    }[], InstallOptions[] | {
+        defaultCover?: string | undefined;
+    }[]>;
+    set: (val: InstallOptions[]) => void;
+}>('aplayerStore');
+
+console.log("store: ", store)
   const currentOrder = ref(props.order);
   const media = ref<InstanceType<typeof VueAudio>>();
   const player = computed(() => media.value!.audio);
@@ -290,7 +300,7 @@
     if (newMusic.theme) {
       currentTheme.value = newMusic.theme;
     } else {
-      const cover = newMusic.cover || store?.store.defaultCover;
+      const cover = newMusic.cover || store?.store.value[0].defaultCover;
       if (cover) {
         setTimeout(async () => {
           try {
@@ -774,7 +784,7 @@
   
   provide('aplayer', {
     ...props,
-    options: store?.store,
+    options: store!.store.value[0],
     listMaxHeight: props.listMaxHeight,
     currentProps: props,
     currentTheme: currentTheme,

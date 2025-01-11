@@ -2,7 +2,7 @@
   "name": "@thatzokay/vue-aplayer",
   "private": false,
   "description": "A beautiful HTML5 music player for Vue.js",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "ThatzOkay",
   "license": "MIT",
   "homepage": "https://github.com/ThatzOkay/vue-aplayer#readme",
@@ -23,10 +23,9 @@
     "media"
   ],
   "type": "module",
-  "files": [
-    "dist",
-    "dist/scss"
-  ],
+  "directories": {
+    "dist": "dist"
+  },
   "main": "./dist/aplayer.umd.js",
   "module": "./dist/aplayer.es.js",
   "typings": "./dist/types/src/index.d.ts",
@@ -48,8 +47,9 @@
     "build:lib": "cross-env MODE=lib vite build",
     "build:tsc": "vue-tsc --emitDeclarationOnly",
     "build:demo": "cross-env MODE=demo vite build",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
     "lint": "eslint ",
     "lint:fix": "eslint --fix ",
     "preview": "vite preview"
@@ -65,10 +65,12 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "@vuepress/bundler-vite": "^2.0.0-rc.19",
+    "@vuepress/plugin-pwa": "^1.9.10",
     "@vuepress/theme-default": "^2.0.0-rc.69",
     "classnames": "^2.5.1",
     "colorthief": "^2.6.0",
     "cross-env": "^7.0.3",
+    "dayjs": "^1.11.13",
     "eslint": "^9.17.0",
     "eslint-plugin-vue": "^9.32.0",
     "globals": "^15.14.0",
@@ -80,6 +82,7 @@
     "typescript-eslint": "^8.19.1",
     "vite": "^6.0.5",
     "vite-plugin-static-copy": "^2.2.0",
+    "vitepress": "^1.5.0",
     "vue-tsc": "^2.2.0",
     "vuepress": "^2.0.0-rc.19"
   }

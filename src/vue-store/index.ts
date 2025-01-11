@@ -13,6 +13,7 @@ watch(store, (newVal) => {
 
 // Methods to interact with the store
 const set = (val: InstallOptions[]) => {
+  localStorage.setItem("key", JSON.stringify(val));
   store.value = val;
 };
 
