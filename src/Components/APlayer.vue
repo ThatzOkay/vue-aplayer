@@ -65,8 +65,9 @@
   import Lyric from './Lyric.vue';
   import { events, ReadyState } from '@/vue-audio';
   import VueAudio from '@/vue-audio';
-  import { parseBlob } from 'music-metadata';
+  import { parseBlob, parseBuffer } from 'music-metadata';
   import type { AudioType } from '@/types/aplayer';
+import { UAParser } from 'ua-parser-js';
   
   const props = withDefaults(defineProps<Options>(), {
     fixed: false,
@@ -665,12 +666,35 @@ console.log("store: ", store)
   
     return new Blob(byteArrays, { type: mime });
   };
+
+  const base64ToByteArray = (base64: string): Uint8Array => {
+    const sliceSize = 1024;
+    const byteChars = window.atob(base64);
+    const byteArrays: number[] = [];
+
+    for (let offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+        const slice = byteChars.slice(offset, offset + sliceSize);
+
+        for (let i = 0; i < slice.length; i++) {
+            byteArrays.push(slice.charCodeAt(i));
+        }
+    }
+
+    return new Uint8Array(byteArrays);
+};
   
   const getAudioUrl = async (audio: Audio): Promise<string> => {
     if (audio.url.match(/^data:/)) {
       const [mimeType, base64Data] = audio.url.split(',');
-      const blob = base64ToBlob(base64Data, mimeType.split(':')[1]);
-      const metadata = await parseBlob(blob);
+      //const blob = base64ToBlob(base64Data, mimeType.split(':')[1]);
+      let metadata = await parseBuffer(base64ToByteArray(base64Data), { mimeType: mimeType.split(':')[1] });
+
+      // if(UAParser(navigator.userAgent).browser.name === 'Safari') {
+      //   metadata = await parseBuffer(base64ToByteArray(base64Data), { mimeType: mimeType.split(':')[1] });
+      // } else {
+      //   metadata = await parseBlob(blob);
+      // }
+
       console.log('metadata: ', metadata);
       const image = metadata.common.picture?.[0];
       if (image) {
