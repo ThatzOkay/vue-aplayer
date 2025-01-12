@@ -1,7 +1,6 @@
 <template>
   <div :class="classNames({
     'aplayer-lrc': true,
-    'aplayer-lrc-hide': !visible,
   })
     ">
     <div class="aplayer-lrc-contents" :style="style">
@@ -33,7 +32,7 @@ interface LyricProps {
   visible?: boolean;
 }
 
-defineProps<LyricProps>();
+const props = defineProps<LyricProps>();
 
 const aplayer = inject<
   Options & {
@@ -94,22 +93,11 @@ const parseLRC = (lrc: string): Array<LRC> => {
     .split('\n')
     .forEach((line) => matchAll(line));
 
-  if (parsed.length > 0) {
-    parsed.sort((a, b) => a.time - b.time);
-  }
+    if (parsed.length > 0) {
+      parsed.sort((a, b) => a.time - b.time);
+    }
 
-  if (lrc === '') {
-    parsed.push({ time: 0, text: noLyrics() });
-  } else {
-    lrc
-      .replace(/\\n/g, '\n')
-      .split('\n')
-      .forEach((line) => parsed.push({ time: 0, text: line }));
-  }
-
-  return parsed.length > 0
-    ? parsed
-    : [{ time: 0, text: lrc !== '' ? lrc : noLyrics() }];
+    return parsed;
 };
 
 const getLyricFromCurrentMusic = (): Promise<string> => {
@@ -176,6 +164,7 @@ const translateY = computed(() => {
 });
 
 const style = computed(() => ({
+  display: props.visible ? 'block' : 'none',
   transform: `${transitionDuration.value}`,
   transition: `translate3d(0, ${translateY.value}px, 0)`,
 }));
