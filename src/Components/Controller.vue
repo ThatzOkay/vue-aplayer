@@ -10,7 +10,7 @@
         <Skip />
       </Button>
       <Button :type="playIcon" @click="handleTogglePlay"> 
-        <Play v-if="!aplayer.media.value.paused" />
+        <Play v-if="aplayer.media.value.paused" />
         <Pause v-else />
       </Button>
       <Button type="forward" @click="handleSkipForward" >
