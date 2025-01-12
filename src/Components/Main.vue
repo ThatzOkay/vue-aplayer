@@ -4,13 +4,11 @@
       <span class="aplayer-title">{{ music.name }}</span>
       <span class="aplayer-author"> - {{ music.artist }}</span>
     </div>
-    <Lyric v-if="!aplayer.fixed" :visible="aplayer.lyricVisible.value" />
     <slot></slot>
   </div>
 </template>
 
 <script setup lang="ts">
-import Lyric from './Lyric.vue';
 import type { Audio, InstallOptions, Media, Options } from '@/types/aplayer';;
 import { inject, computed, type Ref } from 'vue';
 

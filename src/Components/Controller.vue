@@ -7,7 +7,7 @@
         <span class="aplayer-dtime">{{ dtime }}</span>
       </span>
       <Button type="back" icon="skip" @click="handleSkipBackward" />
-      <Button :type="playIcon" :icon="playIcon" @click="handleTogglePlay" />
+      <Button :type="playIcon" :icon="playIcon" @click="handleTogglePlay" style="height: unset;" />
       <Button type="forward" icon="skip" @click="handleSkipForward" />
       <div class="aplayer-volume-wrap">
         <Button
