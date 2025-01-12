@@ -29,7 +29,7 @@ npm i @thatzokay/vue-aplayer
 
 ## Usage
 
-[![Edit vue-aplayer](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/live/be08887f-73ca-424b-ae3f-126de348fc9d)
+[![Edit vue-aplayer-demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/vue-aplayer-demo-p4l2xj?embed=1)
 
 ```ts
 import Vue from 'vue';
