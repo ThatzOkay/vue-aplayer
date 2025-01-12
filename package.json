@@ -2,7 +2,7 @@
   "name": "@thatzokay/vue-aplayer",
   "private": false,
   "description": "A beautiful HTML5 music player for Vue.js",
-  "version": "3.0.5",
+  "version": "3.1.0",
   "author": "ThatzOkay",
   "license": "MIT",
   "homepage": "https://github.com/ThatzOkay/vue-aplayer#readme",
@@ -58,9 +58,10 @@
   },
   "dependencies": {
     "hls.js": "^1.5.18",
-    "ua-parser-js": "^2.0.0",
     "music-metadata": "^10.6.5",
-    "vue": "^3.5.13"
+    "ua-parser-js": "^2.0.0",
+    "vue": "^3.5.13",
+    "vue-material-design-icons": "^5.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
