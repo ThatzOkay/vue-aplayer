@@ -24,20 +24,22 @@ Docs are available at [aplayer.thatzokay.nl/docs/](https://aplayer.thatzokay.nl/
 ## Install
 
 ```bash
-npm install @thatzokay/
+npm i @thatzokay/vue-aplayer
 ```
 
 ## Usage
 
 [![Edit vue-aplayer](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/live/be08887f-73ca-424b-ae3f-126de348fc9d)
 
-```js
+```ts
 import Vue from 'vue';
 import { VueAPlayerPlugin } from '@thatzokay/vue-aplayer';
 
-Vue.use(APlayer, {
-  defaultCover: 'https://github.com/u3u.png', // set the default cover
-});
+createApp(App)
+  .use(VueAPlayerPlugin, {
+    defaultCover: 'https://github.com/u3u.png'
+  })
+  .mount('#app');
 ```
 
 ## Related Projects
