@@ -4,17 +4,15 @@
     :class="'aplayer-icon aplayer-icon-' + type"
     @click="handleClick"
   >
-    <Icon :type="icon" />
+    <slot></slot>
   </button>
 </template>
 
 <script setup lang="ts">
 import { watch } from 'vue';
-import Icon from './Icon.vue';
 
 interface ButtonProps {
   type: string;
-  icon: string;
 }
 
 const emit = defineEmits(['click']);

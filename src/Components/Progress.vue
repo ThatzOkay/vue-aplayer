@@ -9,7 +9,7 @@
       <div class="aplayer-played" :style="playedStyle">
         <span class="aplayer-thumb" :style="style">
           <span class="aplayer-loading-icon">
-            <Icon type="loading" />
+            <Loading />
           </span>
         </span>
       </div>
@@ -19,9 +19,9 @@
 
 <script setup lang="ts">
 import VueTouch from '@/vue-touch/VueTouch.vue';
-import Icon from './Icon.vue';
 import type { Options } from '@/types/aplayer';
 import { inject, ref, computed, type Ref } from 'vue';
+import Loading from './icons/Loading.vue';
 
 const progressBar = ref<HTMLElement | null>(null);
 

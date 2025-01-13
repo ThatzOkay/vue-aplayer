@@ -6,15 +6,25 @@
         <span class="aplayer-ptime">{{ ptime }}</span> /
         <span class="aplayer-dtime">{{ dtime }}</span>
       </span>
-      <Button type="back" icon="skip" @click="handleSkipBackward" />
-      <Button :type="playIcon" :icon="playIcon" @click="handleTogglePlay" style="height: unset;" />
-      <Button type="forward" icon="skip" @click="handleSkipForward" />
+      <Button type="back" @click="handleSkipBackward" >
+        <Skip />
+      </Button>
+      <Button :type="playIcon" @click="handleTogglePlay"> 
+        <Play v-if="aplayer.media.value.paused" />
+        <Pause v-else />
+      </Button>
+      <Button type="forward" @click="handleSkipForward" >
+        <Skip />
+      </Button>
       <div class="aplayer-volume-wrap">
         <Button
           :type="`volume-${volumeIcon}`"
-          :icon="`volume-${volumeIcon}`"
           @click="handleToggleVolume"
-        />
+        >
+          <VolumeUp v-if="aplayer.currentVolume.value > 0.8" />
+          <VolumeDown v-else-if="aplayer.currentVolume.value > 0" />
+          <VolumeOff v-else />
+        </Button>
         <VueTouch class="aplayer-volume-bar-wrap" @on-pan-move="handlePanMove">
           <div
             ref="volumeBar"
@@ -33,21 +43,29 @@
       </div>
       <Button
         type="order"
-        :icon="`order-${aplayer.currentOrder.value}`"
         @click="handleToggleOrderMode"
-      />
+      >
+        <OrderList v-if="aplayer.currentOrder.value === 'list'" />
+        <OrderRandom v-else />
+      </Button>
       <Button
         type="loop"
-        :icon="`loop-${aplayer.currentLoop.value}`"
         @click="handleToggleLoopMode"
-      />
-      <Button type="menu" icon="menu" @click="handleTogglePlaylist" />
+      >
+        <LoopAll v-if="aplayer.currentLoop.value === 'all'" />
+        <LoopOne v-else-if="aplayer.currentLoop.value === 'one'" />
+        <LoopNone v-else />
+      </Button>
+      <Button type="menu" @click="handleTogglePlaylist" >
+        <Menu />
+      </Button>
       <Button
         v-if="aplayer.lrcType !== 0"
         type="lrc"
-        icon="lrc"
         @click="handleToggleLyric"
-      />
+      >
+        <Lrc />
+      </Button>
     </div>
   </div>
 </template>
@@ -59,6 +77,19 @@ import VueTouch from '@/vue-touch/VueTouch.vue';
 import { inject, ref, type Ref, type ComputedRef, computed } from 'vue';
 import type { LoopMode, Media, Options, OrderMode } from '@/types/aplayer';
 import type { LrcType } from '@/types/aplayer';
+import Play from './icons/Play.vue';
+import Pause from './icons/Pause.vue';
+import Skip from './icons/Skip.vue';
+import VolumeUp from './icons/VolumeUp.vue';
+import VolumeDown from './icons/VolumeDown.vue';
+import VolumeOff from './icons/VolumeOff.vue';
+import OrderList from './icons/OrderList.vue';
+import OrderRandom from './icons/OrderRandom.vue';
+import LoopAll from './icons/LoopAll.vue';
+import LoopOne from './icons/LoopOne.vue';
+import LoopNone from './icons/LoopNone.vue';
+import Menu from './icons/Menu.vue';
+import Lrc from './icons/Lrc.vue';
 
 const volumeBar = ref<HTMLElement | null>(null);
 
@@ -89,13 +120,15 @@ const handleChangeVolume = inject('handleChangeVolume') as (
 const playIcon = computed(() =>
   aplayer.media.value.paused ? 'play' : 'pause'
 );
-const volumeIcon = ref(
-  aplayer.currentVolume.value <= 0
-    ? 'off'
-    : aplayer.currentVolume.value >= 0.95
-      ? 'up'
-      : 'down'
-);
+const volumeIcon = computed(() => {
+  if (aplayer.currentVolume.value === 0) {
+    return 'mute';
+  }
+  if (aplayer.currentVolume.value < 0.8) {
+    return 'down';
+  }
+  return 'up';
+})
 
 const timeSecondsFormat = (time: number = 0): string => {
   const minutes = Math.floor(time / 60) || 0;

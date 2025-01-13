@@ -452,6 +452,7 @@ watch(() => listVisible.value, handleChangeListVisible);
 watch(() => lyricVisible.value, handleChangeLyricVisible);
 
 const play = async () => {
+  if (!media.value || media.value.state.src === '') return;
   try {
     // if (mutex) pauseOtherInstances(); ??For now ill leave the multi instace thing out
     await player.value.play();
@@ -467,10 +468,12 @@ const play = async () => {
 
 const pause = () => {
   if (!player.value) return;
+  if (!media.value || media.value.state.src === '') return;
   player.value.pause();
 };
 
 const toggle = () => {
+  if (!media.value || media.value.state.src === '') return;
   if (media.value?.state.paused) play();
   else pause();
 };
@@ -531,6 +534,7 @@ const switchAudio = (audio: number | string) => {
 };
 
 const skipBackward = () => {
+  if (!media.value || media.value.state.src === '') return;
   const playIndex = getPlayIndexByMode('skipBackward');
 
   const newItem = orderList.value[playIndex];
@@ -543,6 +547,7 @@ const skipBackward = () => {
 };
 
 const skipForward = () => {
+  if (!media.value || media.value.state.src === '') return;
   const playIndex = getPlayIndexByMode('skipForward');
 
   const newItem = orderList.value[playIndex];
@@ -693,6 +698,7 @@ const handleTogglePlay = () => {
 };
 
 const handleToggleOrderMode = () => {
+  if (!media.value || media.value.state.src === '') return;
   if (currentOrder.value === 'list') {
     console.log('reshuffle');
     reshuffle();
@@ -715,6 +721,7 @@ const handleToggleOrderMode = () => {
 };
 
 const handleToggleLoopMode = () => {
+  if (!media.value || media.value.state.src === '') return;
   currentLoop.value =
     currentLoop.value === 'all'
       ? 'one'
