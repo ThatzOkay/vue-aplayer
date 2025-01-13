@@ -73,6 +73,6 @@ onMounted(async () => {
   await sleep(1500);
   const aplayer1Data = data.splice(0, 4);
   console.log('data aplayer1', aplayer1Data);
- // aplayer1.value.audio = aplayer1Data;
+  aplayer1.value.audio = aplayer1Data;
 });
 </script>
