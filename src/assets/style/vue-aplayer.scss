@@ -1,4 +1,4 @@
-$aplayer-height: 66px;
+$aplayer-height: 77px;
 $lrc-height: 30px;
 $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
@@ -42,7 +42,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         width: max-content;
         padding: 0 20px; 
         position: absolute;
-        bottom: -20px;
+        bottom: 0px;
+        z-index: 10;
       }
     }
     .aplayer-info
@@ -239,7 +240,6 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
   }
 
   .aplayer-icon {
-    height: 15px;
     width: 15px;
     border: none;
     background-color: transparent;
@@ -251,9 +251,22 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     font-size: 12px;
     margin: 0;
     display: inline-block;
-
     path {
       transition: all 0.2s ease-in-out;
+    }
+
+    span {
+      svg {
+        fill: #666;
+      }
+    }
+
+    &.aplayer-icon-play {
+      height: unset;
+    }
+
+    &.aplayer-icon-pause {
+      height: unset;
     }
   }
 
@@ -272,13 +285,15 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
   }
 
   .aplayer-icon-forward {
-    transform-origin: center;
-    transform: rotate(180deg);
+    svg {
+      transform: rotate(180deg);
+    }
   }
 
-  .aplayer-lrc-content {
+  .aplayer-lrc-contents {
     display: none;
     position: absolute;
+    bottom: 10px;
   }
 
   .aplayer-pic {
@@ -314,6 +329,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     }
 
     .aplayer-play {
+      cursor: pointer;
       width: 26px;
       height: 26px;
       border: 2px solid #fff;
@@ -321,6 +337,23 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
       right: 50%;
       margin: 0 -15px -15px 0;
       svg {
+        position: absolute;
+        top: 3px;
+        left: 4px;
+        height: 20px;
+        width: 20px;
+        path {
+          fill: #000;
+        }
+      }
+      object {
+        position: absolute;
+        top: 3px;
+        left: 4px;
+        height: 20px;
+        width: 20px;
+      }
+      span {
         position: absolute;
         top: 3px;
         left: 4px;
@@ -348,6 +381,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         left: 2px;
         height: 12px;
         width: 12px;
+        path {
+          fill: #000;
+        }
       }
       img {
         position: absolute;
@@ -361,7 +397,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
   .aplayer-info {
     margin-left: $aplayer-height;
-    padding: 14px 7px 0 10px;
+    padding: 10px 7px 0 10px;
     height: $aplayer-height;
     box-sizing: border-box;
 
@@ -387,6 +423,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     .aplayer-controller {
       position: relative;
       display: flex;
+      padding-bottom: 5px;
 
       .aplayer-bar-wrap {
         margin: 0 0 0 5px;
@@ -545,68 +582,12 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
   .aplayer-lrc {
     position: relative;
-    height: $lrc-height;
     text-align: center;
-    overflow: hidden;
-    margin: -10px 0 7px;
+    overflow: visible;
     width: 100%;
     display: flex;
     justify-content: center;
     z-index: 2;
-
-    &:before {
-      position: absolute;
-      top: 0;
-      z-index: 1;
-      display: block;
-      overflow: hidden;
-      width: 100%;
-      height: 10%;
-      content: " ";
-      background: -moz-linear-gradient(
-        top,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      background: -webkit-linear-gradient(
-        top,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#00ffffff', GradientType=0);
-    }
-
-    &:after {
-      position: absolute;
-      bottom: 0;
-      z-index: 1;
-      display: block;
-      overflow: hidden;
-      width: 100%;
-      height: 33%;
-      content: " ";
-      background: -moz-linear-gradient(
-        top,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.8) 100%
-      );
-      background: -webkit-linear-gradient(
-        top,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.8) 100%
-      );
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.8) 100%
-      );
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#ccffffff', GradientType=0);
-    }
 
     p {
       font-size: 12px;

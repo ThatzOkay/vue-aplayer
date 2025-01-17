@@ -2,7 +2,9 @@
   <div class="aplayer-body">
     <Cover @click="handleTogglePlay">
       <div :class="'aplayer-button aplayer-' + playIcon">
-        <Icon :type="playIcon" />
+        <!-- <Icon :type="playIcon" /> -->
+         <PlayIcon v-if="aplayer.media.value.paused" />
+        <PauseIcon v-else />
       </div>
     </Cover>
     <Main>
@@ -31,10 +33,11 @@
 import { inject, provide, computed, type Ref, type ComputedRef } from 'vue';
 import Cover from './Cover.vue';
 import Button from './Button.vue';
-import Icon from './Icon.vue';
 import Main from './Main.vue';
 import Controller from './Controller.vue';
 import type { InstallOptions, Options, Audio, Media } from '@/types/aplayer';
+import PlayIcon from './icons/Play.vue';
+import PauseIcon from './icons/Pause.vue';
 
 export interface Notice {
   text: string;
