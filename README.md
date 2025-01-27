@@ -19,7 +19,7 @@ Most of the planned features are in place but there may still be bugs.
 
 ## Documentation
 
-Docs are available at [aplayer.thatzokay.nl/docs/](https://aplayer.thatzokay.nl/docs/)
+Docs are available at [aplayer.thatzokay.nl/](https://aplayer.thatzokay.nl/)
 
 ## Install
 
