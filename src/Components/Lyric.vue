@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import classNames from 'classnames';
 import { computed, watch, type Ref } from 'vue';
-import type { Audio, InstallOptions, Media, Options } from '@/types/aplayer';
+import type { Audio, InstallOptions, Media, Options } from '@/types';
 import { inject, ref } from 'vue';
 
 interface LRC {

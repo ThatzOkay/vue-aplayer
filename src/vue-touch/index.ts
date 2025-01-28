@@ -1,0 +1,1 @@
+export { default as VueTouch } from "./VueTouch.vue";
