@@ -11,7 +11,7 @@
     ">
     <VueAudio ref="media">
       <Lyric v-if="!fixed" :visible="lyricVisible" />
-      <PlayList :visible="listVisible" :scroll-top="listScrollTop" :current-music="currentMusic"
+      <PlayList v-if="!disableList" :visible="listVisible" :scroll-top="listScrollTop" :current-music="currentMusic"
         :data-source="dataSource" :class="currentOrder === 'list' ? 'aplayer-list' : 'aplayer-list-random'
           " @change="handleChangePlaylist" />
       <Player :notice="notice" @skip-backward="handleSkipBackward" @skip-forward="handleSkipForward"
@@ -33,20 +33,20 @@ import {
   provide,
   ref,
   type VNode,
-  nextTick,
   onMounted,
   Ref,
 } from 'vue';
 import classNames from 'classnames';
 import isMobile from '@/utils';
-import type { Audio, InstallOptions, Options } from '@/types/aplayer';
+import type { Audio, InstallOptions, Options } from '@/types';
 import PlayList from './PlayList.vue';
 import Player, { type Notice } from './Player.vue';
 import Lyric from './Lyric.vue';
-import { events, ReadyState } from '@/vue-audio';
-import VueAudio from '@/vue-audio';
+import { ReadyState } from '@/vue-audio';
+import { VueAudio } from '@/vue-audio';
 import { parseBuffer } from 'music-metadata';
-import type { AudioType } from '@/types/aplayer';
+import type { AudioType } from '@/types';
+import events from '@/vue-audio/events';
 
 const props = withDefaults(defineProps<Options>(), {
   fixed: false,
@@ -62,6 +62,7 @@ const props = withDefaults(defineProps<Options>(), {
   listFolded: false,
   listMaxHeight: 250,
   storageName: 'aplayer-setting',
+  disableList: false,
 });
 
 const emit = defineEmits([
@@ -196,7 +197,7 @@ const loading = ref(
   !!media.value?.state.src &&
   (currentPlayed.value > currentLoaded.value || !media.value?.state.duration)
 );
-const isLoading = ref(
+const isLoading = computed(() =>
   props.preload === 'none'
     ? !media.value?.state.paused && loading.value
     : loading.value
@@ -395,7 +396,6 @@ const handleChangeMini = () => {
 };
 
 const handleChangeCurrentMini = async (_: boolean, oldVal?: boolean) => {
-  await nextTick();
   const cont = container.value;
   isArrow.value = !!cont && cont.offsetWidth <= 300;
   if (oldVal !== undefined) {

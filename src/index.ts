@@ -1,12 +1,16 @@
 import type { App } from "vue";
 import type { Plugin } from "vue";
-import type { InstallOptions } from "./types/aplayer";
+import type { InstallOptions } from "./types";
 import { usePlayerStore } from "./vue-store";
-import APlayer from "./Components/APlayer.vue";
 
 import "./assets/style/vue-aplayer.scss";
 
-export { APlayer };
+export * from "./Components"
+export * from "./vue-audio";
+export * from "./vue-store";
+export * from "./vue-touch";
+export * from "./types";
+export * from "./utils"
 
 const VueAPlayerPlugin: Plugin = {
   install(app: App, options: InstallOptions = {}) {
@@ -16,11 +20,6 @@ const VueAPlayerPlugin: Plugin = {
 
     const opts = { ...defaultOptions, ...options };
     Object.assign(this, { options: opts });
-    
-    app.component('aplayer', APlayer);
-    app.component('Aplayer', APlayer);
-    app.component('APlayer', APlayer);
-    app.component('a-player', APlayer);
 
     const store = usePlayerStore();
 

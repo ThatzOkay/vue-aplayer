@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import classNames from 'classnames';
-import type { Audio, Options } from '@/types/aplayer';
+import type { Audio, Options } from '@/types';
 import { computed, inject, ref, watch } from 'vue';
 
 interface PlayListProps {

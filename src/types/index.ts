@@ -1,3 +1,5 @@
+import { VNode } from "vue";
+
 export type AudioType = 'auto' | 'hls' | 'normal';
 export type LoopMode = 'all' | 'one' | 'none';
 export type OrderMode = 'list' | 'random';
@@ -30,6 +32,7 @@ export interface Options {
     listFolded?: boolean;
     listMaxHeight?: number;
     storageName?: string;
+    disableList?: boolean;
   }
 
   export interface Audio {

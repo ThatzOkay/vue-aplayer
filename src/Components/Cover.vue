@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Audio, InstallOptions, Options } from '@/types/aplayer';
+import type { Audio, InstallOptions, Options } from '@/types';
 import { inject, computed, type Ref } from 'vue';
 
 const aplayer = inject<
