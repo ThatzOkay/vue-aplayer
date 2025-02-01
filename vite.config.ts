@@ -6,11 +6,6 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 // https://vite.dev/config/
 const commonConfig = defineConfig({
   plugins: [vue()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
 });
 
 const libConfig = defineConfig({

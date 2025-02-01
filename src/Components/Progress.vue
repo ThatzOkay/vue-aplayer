@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import VueTouch from '@/vue-touch/VueTouch.vue';
-import type { Options } from '@/types';
+import VueTouch from '../vue-touch/VueTouch.vue';
+import type { Options } from '../types';
 import { inject, ref, computed, type Ref } from 'vue';
 import Loading from './icons/Loading.vue';
 

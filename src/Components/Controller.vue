@@ -73,10 +73,10 @@
 <script setup lang="ts">
 import Progress from './Progress.vue';
 import Button from './Button.vue';
-import VueTouch from '@/vue-touch/VueTouch.vue';
+import VueTouch from '../vue-touch/VueTouch.vue';
 import { inject, ref, type Ref, type ComputedRef, computed } from 'vue';
-import type { LoopMode, Media, Options, OrderMode } from '@/types';
-import type { LrcType } from '@/types';
+import type { LoopMode, Media, Options, OrderMode } from '../types';
+import type { LrcType } from '../types';
 import Play from './icons/Play.vue';
 import Pause from './icons/Pause.vue';
 import Skip from './icons/Skip.vue';

@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import isMobile from '@/utils';
+import isMobile from '../utils';
 
 interface TouchProps {
   panMoveClass?: string;
