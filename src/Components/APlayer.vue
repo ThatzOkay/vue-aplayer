@@ -63,6 +63,7 @@ const props = withDefaults(defineProps<Options>(), {
   listMaxHeight: 250,
   storageName: 'aplayer-setting',
   disableList: false,
+  disableTheming: false,
 });
 
 const emit = defineEmits([
@@ -741,7 +742,7 @@ const handleChangeProgress = (e: MouseEvent | TouchEvent, percent: number) => {
   currentPlayed.value = percent;
   isDraggingProgressBar.value = e.type.includes('move');
   if (['touchend', 'mouseup'].includes(e.type)) {
-    seeking(percent, media.value?.state.paused); // Unable to retrieve duration when preload is set to none
+    seeking(percent, media.value?.state.paused); 
   }
 };
 

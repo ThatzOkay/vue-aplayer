@@ -31,6 +31,7 @@ export interface Options {
     listMaxHeight?: number;
     storageName?: string;
     disableList?: boolean;
+    disableTheming?: boolean;
   }
 
   export interface Audio {

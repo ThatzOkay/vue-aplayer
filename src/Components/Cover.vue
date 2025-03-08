@@ -11,7 +11,7 @@ import { inject, computed, type Ref } from 'vue';
 const aplayer = inject<
   Options & {
     options: InstallOptions;
-    currentTheme: string;
+    currentTheme: Ref<string>;
     currentMusic: Ref<Audio>;
   }
 >('aplayer')!;
@@ -22,10 +22,8 @@ const cover = computed(() => {
     aplayer.options.defaultCover
   );
 });
-const style = computed(() => ({
-  backgroundImage: `url(${cover.value})`,
-  backgroundColor: aplayer?.currentTheme,
-}));
+
+const style = computed(() => `background-image: url(${cover.value});` + (aplayer.disableTheming ? '' : `background-color: ${aplayer.currentTheme.value};`));
 
 const emit = defineEmits(['click']);
 

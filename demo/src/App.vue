@@ -4,15 +4,7 @@
     <h1>Vue-Aplayer</h1>
     <h3>🍰 A beautiful HTML5 music player for Vue.js.</h3>
     <div class="aplayer-wrap">
-      <a-player
-        ref="player0"
-        :fixed="aplayer1.fixed"
-        :lrcType="aplayer1.lrcType"
-        :listMaxHeight="aplayer1.listMaxHeight"
-        :preload="aplayer1.preload"
-        :audio="aplayer1.audio"
-        :listFolded="aplayer1.listFolded"
-      />
+      <APlayer />
     </div>
     <div class="landing-buttons">
       <a
@@ -33,7 +25,6 @@ import { onMounted, ref } from 'vue';
 import Hls from 'hls.js';
 import { sleep } from '../../src/utils';
 import * as music from './assets/music/data.json';
-import '../../src/assets/style/vue-aplayer.scss'
 import { APlayer } from '../../src/index';
 import type { Options as APlayerOptions, Audio as APlayerAudio } from '../../src/index';
 

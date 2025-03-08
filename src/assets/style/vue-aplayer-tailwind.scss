@@ -1,0 +1,14 @@
+.aplayer {
+    @apply overflow-visible bg-white dark:bg-black shadow-xl rounded-sm select-none relative;
+    * {
+        @apply box-content;
+    }
+}
+
+svg {
+    @apply w-full h-full;
+
+    path, circle {
+        @apply fill-base-100;
+    }
+}

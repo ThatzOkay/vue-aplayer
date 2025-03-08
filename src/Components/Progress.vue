@@ -33,18 +33,13 @@ const aplayer = inject<
   }
 >('aplayer')!;
 
-const style = computed(() => ({
-  backgroundColor: aplayer.currentTheme.value,
-}));
+const style = computed(() => (aplayer.disableTheming ? '' : `background-color: ${aplayer.currentTheme.value};`));
 
 const loadedStyle = computed(() => ({
   width: `${aplayer.currentLoaded.value * 100}%`,
 }));
 
-const playedStyle = computed(() => ({
-  width: `${aplayer.currentPlayed.value * 100}%`,
-  backgroundColor: aplayer.currentTheme.value,
-}));
+const playedStyle = computed(() => `width: ${aplayer.currentPlayed.value * 100}%;` + (aplayer.disableTheming ? '' : `background-color: ${aplayer.currentTheme.value};`));
 
 const handleChangeProgress = inject('handleChangeProgress') as (
   e: MouseEvent | TouchEvent,

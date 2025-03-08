@@ -240,7 +240,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
   }
 
   .aplayer-icon {
-    width: 15px;
+    width: 25px;
     border: none;
     background-color: transparent;
     outline: none;
@@ -396,12 +396,15 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
   }
 
   .aplayer-info {
+    display: flex;
     margin-left: $aplayer-height;
     padding: 10px 7px 0 10px;
     height: $aplayer-height;
     box-sizing: border-box;
+    align-items: center;
 
     .aplayer-music {
+      width: 100%;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -421,9 +424,38 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     }
 
     .aplayer-controller {
+      width: 100%;
       position: relative;
-      display: flex;
       padding-bottom: 5px;
+      
+      .aplayer-controller-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+
+        .aplayer-icon {
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          path {
+            fill: #666;
+          }
+
+          &.aplayer-icon-loop {
+            margin-right: 2px;
+          }
+
+          &:hover {
+            path {
+              fill: #000;
+            }
+          }
+
+          &.aplayer-icon-menu {
+            display: none;
+          }
+        }
+      }
 
       .aplayer-bar-wrap {
         margin: 0 0 0 5px;
@@ -440,7 +472,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
         .aplayer-bar {
           position: relative;
-          height: 2px;
+          height: 4px;
           width: 100%;
           background: #cdcdcd;
 
@@ -487,6 +519,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         font-size: 11px;
 
         .aplayer-time-inner {
+          display: flex;
+          gap: 10px;
           vertical-align: middle;
         }
 
@@ -524,6 +558,26 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         }
       }
 
+      .aplayer-loading-icon {
+        display: none;
+
+        svg {
+          position: absolute;
+          animation: rotate 1s linear infinite;
+        }
+      }
+    }
+
+    .aplayer-controller-right {
+      width: 100%;
+      position: relative;
+      height: 100%;
+      margin-right: $aplayer-height;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: 10px;
+
       .aplayer-volume-wrap {
         position: relative;
         display: inline-block;
@@ -550,10 +604,10 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
           .aplayer-volume-bar {
             position: absolute;
-            bottom: 0;
-            right: 10px;
+            bottom: 12px;
+            right: 24px;
             width: 5px;
-            height: 35px;
+            height: 48px;
             background: #aaa;
             border-radius: 2.5px;
             overflow: hidden;
@@ -562,19 +616,33 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
               position: absolute;
               bottom: 0;
               right: 0;
-              width: 5px;
+              width: 16px;
               transition: all 0.1s ease;
             }
           }
         }
       }
 
-      .aplayer-loading-icon {
-        display: none;
+      .aplayer-icon {
+        cursor: pointer;
+        transition: all 0.2s ease;
 
-        svg {
-          position: absolute;
-          animation: rotate 1s linear infinite;
+        path {
+          fill: #666;
+        }
+
+        &.aplayer-icon-loop {
+          margin-right: 2px;
+        }
+
+        &:hover {
+          path {
+            fill: #000;
+          }
+        }
+
+        &.aplayer-icon-menu {
+          display: none;
         }
       }
     }

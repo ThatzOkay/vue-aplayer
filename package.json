@@ -2,7 +2,7 @@
   "name": "@thatzokay/vue-aplayer",
   "private": false,
   "description": "A beautiful HTML5 music player for Vue.js",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "author": "ThatzOkay",
   "license": "MIT",
   "homepage": "https://github.com/ThatzOkay/vue-aplayer#readme",
@@ -29,15 +29,19 @@
   ],
   "main": "./dist/aplayer.umd.js",
   "module": "./dist/aplayer.es.js",
-  "typings": "./dist/types/index.d.ts",
-  "types": "./dist/types/index.d.ts",
-  "style": "./dist/vue-aplayer.css",
+  "typings": "dist/types/index.d.ts",
+  "types": "dist/types/index.d.ts",
+  "style": "dist/vue-aplayer.css",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "style": "./dist/vue-aplayer.css",
       "import": "./dist/aplayer.es.js",
       "require": "./dist/aplayer.umd.js"
+    },
+    "./dist/scss/*.scss": {
+      "require": "./dist/scss/*.scss",
+      "import": "./dist/scss/*.scss"
     }
   },
   "scripts": {
@@ -56,6 +60,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.20",
     "hls.js": "^1.5.18",
     "music-metadata": "^10.6.5",
     "ua-parser-js": "^2.0.0",
@@ -69,13 +74,16 @@
     "classnames": "^2.5.1",
     "colorthief": "^2.6.0",
     "cross-env": "^7.0.3",
+    "daisyui": "^4.12.23",
     "dayjs": "^1.11.13",
     "eslint": "^9.17.0",
     "eslint-plugin-vue": "^9.32.0",
+    "fluid-tailwind": "^1.0.4",
     "globals": "^15.14.0",
     "postcss": "^8.4.49",
     "rimraf": "^6.0.1",
     "sass-embedded": "^1.83.1",
+    "tailwindcss": "^3.4.13",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.19.1",
     "vite": "^6.0.5",
