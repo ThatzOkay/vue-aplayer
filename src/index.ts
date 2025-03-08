@@ -3,7 +3,7 @@ import type { Plugin } from "vue";
 import type { InstallOptions } from "./types";
 import { usePlayerStore } from "./vue-store";
 
-import "./assets/style/vue-aplayer.scss";
+//import "./assets/style/vue-aplayer.scss";
 
 export * from "./Components"
 export * from "./vue-audio";

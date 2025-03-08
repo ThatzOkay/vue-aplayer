@@ -1,4 +1,4 @@
-import { InstallOptions } from '@/types';
+import { InstallOptions } from '../types';
 import { ref, watch } from 'vue';
 
 const key = 'aplayer-setting';

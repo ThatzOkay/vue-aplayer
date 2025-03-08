@@ -6,11 +6,6 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 // https://vite.dev/config/
 const commonConfig = defineConfig({
   plugins: [vue()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
 });
 
 const libConfig = defineConfig({
@@ -36,8 +31,16 @@ const libConfig = defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: "src/assets/style/vue-aplayer.scss", // Path to your SCSS file
-          dest: "scss/", // Destination directory in the dist folder
+          src: "src/assets/style/vue-aplayer.scss", 
+          dest: "scss/", 
+        },
+        {
+          src: "src/assets/style/vue-aplayer-daisyui.scss", 
+          dest: "scss/", 
+        },
+        {
+          src: "src/assets/style/vue-aplayer-tailwind.scss", 
+          dest: "scss/", 
         },
       ],
     }),

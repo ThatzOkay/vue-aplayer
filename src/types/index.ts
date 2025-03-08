@@ -1,5 +1,3 @@
-import { VNode } from "vue";
-
 export type AudioType = 'auto' | 'hls' | 'normal';
 export type LoopMode = 'all' | 'one' | 'none';
 export type OrderMode = 'list' | 'random';
@@ -33,14 +31,15 @@ export interface Options {
     listMaxHeight?: number;
     storageName?: string;
     disableList?: boolean;
+    disableTheming?: boolean;
   }
 
   export interface Audio {
     [index: number]: this;
 
     id?: number;
-    name: string | VNode;
-    artist: string | VNode;
+    name: string;
+    artist: string;
     url: string;
     cover?: string;
     lrc?: string;

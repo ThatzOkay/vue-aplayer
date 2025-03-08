@@ -35,7 +35,7 @@ import Cover from './Cover.vue';
 import Button from './Button.vue';
 import Main from './Main.vue';
 import Controller from './Controller.vue';
-import type { InstallOptions, Options, Audio, Media } from '@/types';
+import type { InstallOptions, Options, Audio, Media } from '../types';
 import PlayIcon from './icons/Play.vue';
 import PauseIcon from './icons/Pause.vue';
 

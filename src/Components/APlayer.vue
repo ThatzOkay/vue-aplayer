@@ -37,16 +37,16 @@ import {
   Ref,
 } from 'vue';
 import classNames from 'classnames';
-import isMobile from '@/utils';
-import type { Audio, InstallOptions, Options } from '@/types';
+import isMobile from '../utils';
+import type { Audio, InstallOptions, Options } from '../types';
 import PlayList from './PlayList.vue';
 import Player, { type Notice } from './Player.vue';
 import Lyric from './Lyric.vue';
-import { ReadyState } from '@/vue-audio';
-import { VueAudio } from '@/vue-audio';
+import { ReadyState } from '../vue-audio';
+import { VueAudio } from '../vue-audio';
 import { parseBuffer } from 'music-metadata';
-import type { AudioType } from '@/types';
-import events from '@/vue-audio/events';
+import type { AudioType } from '../types';
+import events from '../vue-audio/events';
 
 const props = withDefaults(defineProps<Options>(), {
   fixed: false,
@@ -63,6 +63,7 @@ const props = withDefaults(defineProps<Options>(), {
   listMaxHeight: 250,
   storageName: 'aplayer-setting',
   disableList: false,
+  disableTheming: false,
 });
 
 const emit = defineEmits([
@@ -114,7 +115,6 @@ const handleChangePlayList = async (
   newList: Audio[],
   oldList?: Audio[]
 ) => {
-  console.log('changing playlist handleChangePlayList');
   if (oldList) {
     const newLength = newList.length;
     const oldLength = oldList.length;
@@ -728,7 +728,6 @@ const handleToggleLoopMode = () => {
       : currentLoop.value === 'one'
         ? 'none'
         : 'all';
-  console.log('currentLoop', currentLoop.value);
 };
 
 const handleTogglePlaylist = () => {
@@ -743,7 +742,7 @@ const handleChangeProgress = (e: MouseEvent | TouchEvent, percent: number) => {
   currentPlayed.value = percent;
   isDraggingProgressBar.value = e.type.includes('move');
   if (['touchend', 'mouseup'].includes(e.type)) {
-    seeking(percent, media.value?.state.paused); // preload 为 none 的情况下无法获取到 duration
+    seeking(percent, media.value?.state.paused); 
   }
 };
 

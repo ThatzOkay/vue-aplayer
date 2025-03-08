@@ -5,7 +5,7 @@
         'aplayer-list-light': item.id === currentMusic?.id,
       })
         " @click="handleClick(item, index)">
-        <span class="aplayer-list-cur" :style="{ backgroundColor: aplayer?.currentTheme }" />
+        <span class="aplayer-list-cur" :style="{ ...(aplayer?.disableTheming && { backgroundColor: aplayer?.currentTheme.value }) }" />
         <span class="aplayer-list-index">{{ index + 1 }}</span>
         <span class="aplayer-list-title">{{ item.name }}</span>
         <span class="aplayer-list-author">{{ item.artist }}</span>
@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 import classNames from 'classnames';
-import type { Audio, Options } from '@/types';
-import { computed, inject, ref, watch } from 'vue';
+import type { Audio, Options } from '../types';
+import { computed, inject, Ref, ref, watch } from 'vue';
 
 interface PlayListProps {
   visible?: boolean;
@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<PlayListProps>(), {
 
 const aplayer = inject<
   Options & {
-    currentTheme: string;
+    currentTheme: Ref<string>;
   }
 >('aplayer');
 
